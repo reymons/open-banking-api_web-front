@@ -1,0 +1,20 @@
+{
+    "name": "open-banking-api_web-front",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Web Frontend for Open Banking API implementation",
+    "homepage": "https://github.com/reymons/open-banking-api_web-front#readme",
+    "workspaces": [
+        "./apps/*"
+    ],
+    "bugs": {
+        "url": "https://github.com/reymons/open-banking-api_web-front/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/reymons/open-banking-api_web-front.git"
+    },
+    "license": "MIT",
+    "author": "Danil",
+    "type": "module"
+}
