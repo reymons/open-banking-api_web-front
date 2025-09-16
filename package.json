@@ -16,5 +16,24 @@
     },
     "license": "MIT",
     "author": "Danil",
-    "type": "module"
+    "type": "module",
+    "scripts": {
+        "init:git-hooks": "./scripts/init-git-hooks.sh",
+        "lint": "npm run lint --workspace online-banking",
+        "format": "npm run format --workspace online-banking",
+        "test": "npm run test --workspace online-banking",
+        "dev:online-banking": "npm run dev --workspace online-banking",
+        "dev:open-banking": "npm run dev --workspace open-banking",
+        "build:online-banking": "npm run build --workspace online-banking",
+        "build:open-banking": "npm run build --workspace open-banking"
+    },
+    "devDependencies": {
+        "@types/node": "^24.4.0",
+        "prettier": "^3.6.2",
+        "tsx": "^4.20.5",
+        "typescript": "^5.9.2"
+    },
+    "engine": {
+        "node": ">=22.14.0"
+    }
 }
