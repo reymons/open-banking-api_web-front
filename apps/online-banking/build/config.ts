@@ -3,20 +3,32 @@ import type wp from "webpack";
 import HtmlPlugin from "html-webpack-plugin";
 import CssExtractPlugin from "mini-css-extract-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import { Configuration as DevServerCfg } from "webpack-dev-server";
 import { RemoveLicensePlugin } from "./plugin";
 import { getCssClass } from "./util";
-import { Configuration as DevServerCfg } from "webpack-dev-server";
 
 const isDev = process.env.NODE_ENV === "development";
 const rootDir = path.resolve(__dirname, "..");
 const outputDir = path.join(rootDir, "dist");
 const publicDir = path.join(rootDir, "public");
 
+const cssBaseLoaders = [
+    {
+        loader: "postcss-loader",
+        options: {
+            postcssOptions: {
+                plugins: ["postcss-preset-env"],
+            },
+        },
+    },
+    "sass-loader",
+];
+
 // TODO: separate dev and prod configs
 const cfg: wp.Configuration & { devServer: DevServerCfg } = {
     entry: path.join(rootDir, "src", "app", "index.tsx"),
     output: {
-        path: path.join(rootDir, "dist"),
+        path: outputDir,
         clean: true,
         publicPath: isDev ? "/" : "/_static",
         filename: "js/[name].[contenthash].js",
@@ -28,10 +40,11 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
+                sideEffects: false,
                 use: "swc-loader",
             },
             {
-                test: /\.scss$/,
+                test: /\.module\.scss$/,
                 use: [
                     isDev ? "style-loader" : CssExtractPlugin.loader,
                     {
@@ -48,15 +61,19 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
                             },
                         },
                     },
+                    ...cssBaseLoaders,
+                ],
+            },
+            {
+                test: /\.scss$/,
+                sideEffects: true,
+                use: [
+                    isDev ? "style-loader" : CssExtractPlugin.loader,
                     {
-                        loader: "postcss-loader",
-                        options: {
-                            postcssOptions: {
-                                plugins: ["postcss-preset-env"],
-                            },
-                        },
+                        loader: "css-loader",
+                        options: { importLoaders: 2 },
                     },
-                    "sass-loader",
+                    ...cssBaseLoaders,
                 ],
             },
             {
@@ -65,10 +82,7 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
             },
         ],
     },
-    plugins: [
-        new RemoveLicensePlugin(),
-        new HtmlPlugin({ template: path.join(publicDir, "index.html") }),
-    ],
+    plugins: [new HtmlPlugin({ template: path.join(publicDir, "index.html") })],
     mode: isDev ? "development" : "production",
     devtool: isDev ? "inline-source-map" : "source-map",
     resolve: {
@@ -78,11 +92,14 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
     },
     devServer: {
         host: process.env.HOST ?? "localhost",
-        port: process.env.PORT ?? 5000,
+        port: process.env.PORT ?? 7000,
         static: outputDir,
         historyApiFallback: true,
         compress: true,
     },
+    experiments: {
+        lazyCompilation: true,
+    }
 };
 
 if (!isDev) {
@@ -90,7 +107,8 @@ if (!isDev) {
         new CssExtractPlugin({
             filename: "css/[name].[contenthash].css",
             chunkFilename: "chunks/css/[id].[contenthash].css",
-        })
+        }),
+        new RemoveLicensePlugin()
     );
 
     cfg.optimization = {
