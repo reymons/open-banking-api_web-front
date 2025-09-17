@@ -5,6 +5,7 @@ import CssExtractPlugin from "mini-css-extract-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import { RemoveLicensePlugin } from "./plugin";
 import { getCssClass } from "./util";
+import { Configuration as DevServerCfg } from "webpack-dev-server";
 
 const isDev = process.env.NODE_ENV === "development";
 const rootDir = path.resolve(__dirname, "..");
@@ -12,7 +13,7 @@ const outputDir = path.join(rootDir, "dist");
 const publicDir = path.join(rootDir, "public");
 
 // TODO: separate dev and prod configs
-const cfg: wp.Configuration = {
+const cfg: wp.Configuration & { devServer: DevServerCfg } = {
     entry: path.join(rootDir, "src", "app", "index.tsx"),
     output: {
         path: path.join(rootDir, "dist"),
@@ -85,7 +86,7 @@ const cfg: wp.Configuration = {
 };
 
 if (!isDev) {
-    cfg.plugins.push(
+    cfg.plugins!.push(
         new CssExtractPlugin({
             filename: "css/[name].[contenthash].css",
             chunkFilename: "chunks/css/[id].[contenthash].css",
