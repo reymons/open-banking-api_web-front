@@ -3,5 +3,5 @@
 set -eu
 set -o pipefail
 
-npm run lint
-npm run format
+pnpm run lint
+pnpm run format

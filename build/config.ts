@@ -41,7 +41,20 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 sideEffects: false,
-                use: "swc-loader",
+                use: ["thread-loader", "swc-loader"],
+            },
+            {
+                test: /\.scss$/,
+                exclude: /\.module\.scss$/,
+                sideEffects: true,
+                use: [
+                    isDev ? "style-loader" : CssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                        options: { importLoaders: 2 },
+                    },
+                    ...cssBaseLoaders,
+                ],
             },
             {
                 test: /\.module\.scss$/,
@@ -60,18 +73,6 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
                                 },
                             },
                         },
-                    },
-                    ...cssBaseLoaders,
-                ],
-            },
-            {
-                test: /\.scss$/,
-                sideEffects: true,
-                use: [
-                    isDev ? "style-loader" : CssExtractPlugin.loader,
-                    {
-                        loader: "css-loader",
-                        options: { importLoaders: 2 },
                     },
                     ...cssBaseLoaders,
                 ],
@@ -99,7 +100,7 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
     },
     experiments: {
         lazyCompilation: true,
-    }
+    },
 };
 
 if (!isDev) {
