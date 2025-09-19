@@ -6,7 +6,6 @@
         "allowJs": false,
         "skipLibCheck": true,
         "esModuleInterop": true,
-        "allowImportingTsExtensions": true,
         "allowSyntheticDefaultImports": true,
         "strict": true,
         "forceConsistentCasingInFileNames": true,

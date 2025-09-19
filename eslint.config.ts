@@ -9,7 +9,6 @@ export default defineConfig([
     globalIgnores(["./dist/*", "jest.config.js"]),
     eslint.configs.recommended,
     tseslint.configs.recommended,
-    tseslint.configs.recommended,
     react.configs.flat.recommended,
     reactHooks.configs["recommended-latest"],
     a11y.flatConfigs.recommended,
