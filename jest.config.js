@@ -1,11 +1,14 @@
 module.exports = {
     testEnvironment: "jest-environment-jsdom",
-    setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+    setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
     transform: {
         "^.+\\.(t|j)sx?$": "@swc/jest",
     },
     moduleNameMapper: {
-        "^@src/(.+)$": "<rootDir>/src/*",
+        "^@/(.+)$": "<rootDir>/src/$1",
         "\\.(css|less|scss|sass)$": "<rootDir>/src/testing/mocks/styles.ts"
+    },
+    testEnvironmentOptions: {
+        globalsCleanup: "on",
     }
 };
