@@ -18,6 +18,8 @@ export default defineConfig([
         rules: {
             "react/react-in-jsx-scope": "off",
             "react-hooks/exhaustive-deps": "error",
+            "@typescript-eslint/no-require-imports": "off",
+            "react/prop-types": "off",
         },
         settings: {
             react: {
