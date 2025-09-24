@@ -4,25 +4,39 @@ import HtmlPlugin from "html-webpack-plugin";
 import CssExtractPlugin from "mini-css-extract-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import { Configuration as DevServerCfg } from "webpack-dev-server";
-import { RemoveLicensePlugin } from "./plugin";
 import { getCssClass } from "./util";
+import { PreloadAssetsPlugin } from "./plugins/preload-assets-plugin";
+import { RemoveLicensePlugin } from "./plugins/remove-license-plugin";
+import { CriticalPathPlugin } from "./plugins/critical-path-plugin";
 
 const isDev = process.env.NODE_ENV === "development";
 const rootDir = path.resolve(__dirname, "..");
 const outputDir = path.join(rootDir, "dist");
-const publicDir = path.join(rootDir, "public");
 
 const cssBaseLoaders = [
-    {
-        loader: "postcss-loader",
-        options: {
-            postcssOptions: {
-                plugins: ["postcss-preset-env"],
-            },
-        },
-    },
+    isDev
+        ? undefined
+        : {
+              loader: "postcss-loader",
+              options: {
+                  postcssOptions: {
+                      plugins: [
+                          [
+                              "postcss-preset-env",
+                              {
+                                  features: {
+                                      "custom-properties": false, // disable CSS variable polyfill
+                                  },
+                              },
+                          ],
+                      ],
+                  },
+              },
+          },
     "sass-loader",
-];
+].filter(Boolean);
+
+const htmlFilename = isDev ? "index.dev.html" : "index.html";
 
 // TODO: separate dev and prod configs
 const cfg: wp.Configuration & { devServer: DevServerCfg } = {
@@ -30,10 +44,11 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
     output: {
         path: outputDir,
         clean: true,
-        publicPath: isDev ? "/" : "/_static",
+        publicPath: isDev ? "/" : "/_static/",
         filename: "js/[name].[contenthash].js",
         chunkFilename: "chunks/js/[id].[contenthash].js",
         cssChunkFilename: "chunks/css/[id].[contenthash].css",
+        assetModuleFilename: "assets/[hash][ext][query]",
     },
     module: {
         rules: [
@@ -78,28 +93,33 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
                 ],
             },
             {
-                test: /\.(svg|png|jpe?g|gif|webp|avif)$/,
+                test: /\.(svg|png|jpe?g|gif|webp|avif|woff2)$/,
                 type: "asset/resource",
+                sideEffects: true,
             },
         ],
     },
-    plugins: [new HtmlPlugin({ template: path.join(publicDir, "index.html") })],
+    plugins: [
+        new HtmlPlugin({
+            template: path.join(rootDir, htmlFilename),
+        }),
+    ],
     mode: isDev ? "development" : "production",
-    devtool: isDev ? "inline-source-map" : "source-map",
+    devtool: isDev ? "inline-source-map" : false,
     resolve: {
         extensions: [".js", ".ts", ".tsx"],
-        modules: ["node_modules", publicDir],
+        modules: ["node_modules"],
         plugins: [new TsconfigPathsPlugin({ baseUrl: rootDir })],
     },
     devServer: {
-        host: process.env.HOST ?? "localhost",
+        host: process.env.HOST ?? "0.0.0.0",
         port: process.env.PORT ?? 7000,
         static: outputDir,
         historyApiFallback: true,
         compress: true,
     },
     experiments: {
-        lazyCompilation: true,
+        lazyCompilation: isDev,
     },
 };
 
@@ -109,7 +129,14 @@ if (!isDev) {
             filename: "css/[name].[contenthash].css",
             chunkFilename: "chunks/css/[id].[contenthash].css",
         }),
-        new RemoveLicensePlugin()
+        new RemoveLicensePlugin(),
+        new CriticalPathPlugin({
+            cssDir: "css",
+            htmlFilename,
+        }),
+        new PreloadAssetsPlugin({
+            preloadedAssetsDir: path.join(rootDir, "src", "assets", "preloaded"),
+        }),
     );
 
     cfg.optimization = {
