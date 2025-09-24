@@ -6,6 +6,7 @@ module.exports = {
     },
     moduleNameMapper: {
         "^@/(.+)$": "<rootDir>/src/$1",
+        "^@ui/(.+)$": "<rootDir>/src/comp/ui/$1",
         "\\.(css|less|scss|sass)$": "<rootDir>/src/testing/mocks/styles.ts"
     },
     testEnvironmentOptions: {

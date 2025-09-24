@@ -136,7 +136,7 @@ if (!isDev) {
         }),
         new PreloadAssetsPlugin({
             preloadedAssetsDir: path.join(rootDir, "src", "assets", "preloaded"),
-        }),
+        })
     );
 
     cfg.optimization = {

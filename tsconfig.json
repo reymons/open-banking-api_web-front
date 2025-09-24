@@ -19,6 +19,7 @@
         "jsx": "react-jsx",
         "incremental": true,
         "paths": {
+            "@ui/*": ["./src/comp/ui/*"],
             "@/*": ["./src/*"]
         }
     },

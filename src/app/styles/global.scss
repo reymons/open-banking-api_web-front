@@ -1,0 +1,18 @@
+// Entrypoint. Gathers all the global styles
+
+@forward "./reset.scss";
+@forward "./a11y.scss";
+@forward "./util.scss";
+@forward "./vars.scss";
+@forward "./font.scss";
+@use "@/styles/scrollbar.scss";
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    font-size: 1rem;
+    font-family: DM Sans;
+    color: var(--color-text-primary);
+}

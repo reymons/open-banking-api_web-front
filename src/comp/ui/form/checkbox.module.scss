@@ -1,0 +1,77 @@
+@use "@/styles/unit.scss";
+@use "./styles/form.scss";
+
+.input {
+    position: relative;
+    flex-shrink: 0;
+    appearance: none;
+    background-color: var(--color-white);
+    border: 1px solid form.$color-placeholder;
+    border-radius: unit.rem(8);
+    cursor: pointer;
+    transition: background-color 150ms ease-in;
+    height: unit.rem(24);
+    width: unit.rem(24);
+
+    &.error {
+        border-color: form.$color-error;
+    }
+
+    &:checked {
+        background-color: var(--color-primary);
+    }
+
+    &::after,
+    &::before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: unit.rem(2);
+        opacity: 0;
+        background-color: var(--color-white);
+        border-radius: inherit;
+        transition:
+            opacity 150ms ease-in,
+            transform 150ms ease-in,
+            height 150ms ease-in;
+        transform-origin: bottom;
+    }
+
+    &::after {
+        transform: translate(-50%, -40%);
+        height: 10%;
+        top: 50%;
+        left: 50%;
+    }
+    &::before {
+        transform: translate(-45%, -40%);
+        height: 30%;
+        top: 39%;
+        left: 45%;
+    }
+
+    &:checked::after,
+    &:checked::before {
+        opacity: 1;
+    }
+
+    &:checked::after {
+        transform: translate(-50%, -40%) rotate(-45deg) scale(1);
+        height: 30%;
+    }
+
+    &:checked::before {
+        transform: translate(-45%, -40%) rotate(44deg) scale(1);
+        height: 50%;
+    }
+
+    &.invalid {
+        border-color: form.$color-error;
+    }
+}
+
+.withLabel {
+    display: flex;
+    align-items: center;
+    gap: unit.rem(10);
+}

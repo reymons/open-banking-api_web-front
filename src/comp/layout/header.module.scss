@@ -1,0 +1,41 @@
+@use "@/styles/unit.scss";
+@use "@/styles/device.scss";
+
+.wrapper {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: var(--header-z-index);
+
+    > div {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        @include device.mobile {
+            justify-content: space-between;
+        }
+    }
+
+    nav {
+        margin-left: unit.rem(64);
+        margin-right: auto;
+
+        ul {
+            display: flex;
+            align-items: center;
+            gap: unit.rem(54);
+        }
+
+        a {
+            text-decoration: none;
+            font-size: unit.rem(16);
+        }
+
+        @include device.mobile {
+            display: none;
+        }
+    }
+}

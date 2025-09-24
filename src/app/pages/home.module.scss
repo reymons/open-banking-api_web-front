@@ -1,0 +1,241 @@
+@use "@/styles/unit.scss";
+@use "@/styles/device.scss";
+
+.page {
+    --banner-offset-y: calc(-1 * var(--header-height));
+    --section-offset-y: #{unit.rem(100)};
+
+    @include device.mobile {
+        --section-offset-y: #{unit.rem(52)};
+    }
+}
+
+.bannerWrapper {
+    background-color: var(--color-secondary);
+    transform: translateY(var(--banner-offset-y));
+}
+
+.banner {
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+        margin-top: unit.rem(10);
+        margin-bottom: unit.rem(32);
+        font-size: unit.rem(58);
+        white-space: pre-line;
+
+        @include device.mobile {
+            margin-bottom: unit.rem(16);
+            font-size: unit.rem(34);
+        }
+    }
+
+    .subTitle {
+        white-space: pre-line;
+
+        @media (max-width: 786px) {
+            white-space: unset;
+        }
+    }
+
+    .bankName {
+        color: var(--color-primary);
+    }
+
+    .ctaBtns {
+        display: flex;
+        gap: unit.rem(30);
+        margin-top: unit.rem(32);
+
+        @include device.mobile {
+            gap: unit.rem(16);
+            > * {
+                flex-basis: 50%;
+            }
+        }
+    }
+
+    .imgWrapper {
+        padding-top: 5svh;
+        max-width: 50%;
+
+        @media (max-width: 786px) {
+            display: none;
+        }
+    }
+}
+
+.section {
+    padding-top: var(--section-offset-y);
+    padding-bottom: var(--section-offset-y);
+
+    h2 {
+        font-size: unit.rem(34);
+        margin-bottom: unit.rem(62);
+
+        @include device.mobile {
+            font-size: unit.rem(24);
+            margin-bottom: unit.rem(40);
+        }
+    }
+}
+
+.services {
+    padding-top: calc(var(--section-offset-y) + var(--banner-offset-y));
+    position: relative;
+
+    // Purple blur effect on the left side
+    &::after {
+        content: "";
+        position: absolute;
+        width: unit.rem(480);
+        height: unit.rem(480);
+        left: -50%;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #46237a;
+        filter: blur(320px);
+        border-radius: 50%;
+        z-index: -1;
+
+        @include device.mobile {
+            width: unit.rem(360);
+            height: unit.rem(360);
+            left: -75%;
+        }
+    }
+
+    ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: unit.rem(60) unit.rem(200);
+
+        li {
+            display: flex;
+            gap: unit.rem(32);
+
+            .desc {
+                margin-top: unit.rem(16);
+            }
+
+            @include device.mobile {
+                gap: unit.rem(16);
+
+                img {
+                    width: unit.rem(30);
+                    height: unit.rem(30);
+                }
+            }
+        }
+
+        @include device.mobile {
+            grid-template-columns: 1fr;
+            gap: unit.rem(40) 0;
+        }
+    }
+}
+
+.faq {
+    background-color: var(--color-secondary);
+    position: relative;
+}
+
+.questionMark {
+    font-size: unit.rem(737);
+    font-weight: 700;
+    position: absolute;
+    right: 0;
+    top: unit.rem(9);
+    color: var(--color-text-hint);
+    line-height: 0.72;
+    pointer-events: none;
+    opacity: 0.25;
+
+    @include device.mobile {
+        display: none;
+    }
+}
+
+.faqDesc {
+    margin-top: unit.rem(32);
+}
+
+.faqItem {
+    --color-arrow: var(--color-purple-600);
+    color: var(--color-purple-600);
+    margin-top: unit.rem(32);
+    &:first-of-type {
+        margin-top: 0;
+    }
+
+    a {
+        display: inline-flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+
+        svg {
+            flex-shrink: 0;
+            margin-top: unit.rem(5);
+        }
+    }
+
+    @include device.mobile {
+        margin-top: unit.rem(20);
+    }
+}
+
+.faqContent {
+    display: flex;
+    align-items: stretch;
+    gap: unit.rem(200);
+    position: relative;
+    z-index: 1;
+
+    & > * {
+        flex-basis: 50%;
+    }
+
+    @include device.mobile {
+        flex-direction: column;
+        gap: unit.rem(50);
+
+        & > * {
+            flex-basis: unset;
+        }
+    }
+}
+
+.faqContentText {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.paymentServices {
+    h2 {
+        text-align: center;
+    }
+
+    ul {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        img {
+            height: unit.rem(60);
+            object-fit: contain;
+        }
+
+        @include device.mobile {
+            img {
+                height: unit.rem(25);
+                max-width: unit.rem(100);
+            }
+            gap: unit.rem(20);
+        }
+    }
+}

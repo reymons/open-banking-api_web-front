@@ -1,0 +1,13 @@
+@use "@/styles/unit.scss";
+@use "./styles/form.scss";
+
+.label {
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: unit.rem(8);
+    line-height: 1.1;
+
+    &.error {
+        color: form.$color-error;
+    }
+}

@@ -1,0 +1,11 @@
+@use "@/styles/unit.scss";
+
+$color-placeholder: var(--color-black-300);
+$color-error: var(--color-danger);
+
+%element {
+    border-radius: var(--border-radius-md);
+    border: 1px solid $color-placeholder;
+    background-color: var(--color-white);
+    font-size: unit.rem(16);
+}

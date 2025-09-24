@@ -1,0 +1,10 @@
+@use "@/styles/unit.scss";
+
+.socials {
+    display: flex;
+    gap: unit.rem(16);
+
+    a {
+        display: inline-block;
+    }
+}

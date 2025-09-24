@@ -1,11 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { AppProvider } from "./provider";
+import { AppRouter } from "./router";
+import "./styles/global.scss";
 
 const rootEl = document.getElementById("app");
 const root = createRoot(rootEl!);
 
 root.render(
     <StrictMode>
-        <h1>Hello World</h1>
+        <AppProvider>
+            <AppRouter />
+        </AppProvider>
     </StrictMode>
 );
