@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkonline_banking=self.webpackChunkonline_banking||[]).push([[792],{796:(e,n,l)=>{var t=l(813),c=l(729),o=l(66);const r=document.getElementById("app");(0,o.createRoot)(r).render((0,t.jsx)(c.StrictMode,{children:(0,t.jsx)("h1",{children:"Hello World"})}))}},e=>{e.O(0,[644,123],()=>e(e.s=796)),e.O()}]);
