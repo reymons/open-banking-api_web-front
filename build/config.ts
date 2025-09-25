@@ -3,6 +3,7 @@ import type wp from "webpack";
 import HtmlPlugin from "html-webpack-plugin";
 import CssExtractPlugin from "mini-css-extract-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { Configuration as DevServerCfg } from "webpack-dev-server";
 import { getCssClass } from "./util";
 import { PreloadAssetsPlugin } from "./plugins/preload-assets-plugin";
@@ -10,6 +11,7 @@ import { RemoveLicensePlugin } from "./plugins/remove-license-plugin";
 import { CriticalPathPlugin } from "./plugins/critical-path-plugin";
 
 const isDev = process.env.NODE_ENV === "development";
+const withBundleAnalyzer = !!process.env.BUNDLE_ANALYZER;
 const rootDir = path.resolve(__dirname, "..");
 const outputDir = path.join(rootDir, "dist");
 
@@ -139,9 +141,19 @@ if (!isDev) {
         })
     );
 
+    if (withBundleAnalyzer) {
+        cfg.plugins!.push(
+            new BundleAnalyzerPlugin({
+                openAnalyzer: false,
+            })
+        );
+    }
+
     cfg.optimization = {
         runtimeChunk: "single",
         minimize: true,
+        usedExports: true,
+        providedExports: true,
         splitChunks: {
             chunks: "all",
             maxInitialRequests: Infinity,

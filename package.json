@@ -10,6 +10,7 @@
         "test": "jest",
         "build": "NODE_ENV=production tsx ./build/cmd/build.ts",
         "dev": "NODE_ENV=development tsx watch ./build/cmd/dev-server.ts",
+        "bundle-analyzer": "BUNDLE_ANALYZER=1 NODE_ENV=production tsx ./build/cmd/build.ts",
         "dev-server": "tsx watch ./dev-server/server.ts"
     },
     "devDependencies": {
