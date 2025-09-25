@@ -1,9 +1,9 @@
 import * as yup from "yup";
 import { Link } from "react-router";
 import { Button } from "@ui/button";
-import { Text } from "@ui/text";
 import { Form, Checkbox, Input, PasswordInput, EmailInput } from "@ui/form";
 import { px2rem } from "@/lib/css";
+import { paths } from "@/config/paths";
 
 const schema = yup.object({
     firstName: yup.string().required().label("First name"),
@@ -72,11 +72,20 @@ export const RegisterForm = () => {
                         reg={register("termsAccepted")}
                         error={formState.errors.termsAccepted}
                         label={
-                            <Text fw={500}>
-                                I agree to all the <Link className="link-primary">Terms</Link>,{" "}
-                                <Link className="link-primary">Privacy Policy</Link> and{" "}
-                                <Link className="link-primary">Fees</Link>
-                            </Text>
+                            <div>
+                                I agree to all the{" "}
+                                <Link className="inline-clickable" to={paths.void.path}>
+                                    Terms
+                                </Link>
+                                ,{" "}
+                                <Link className="inline-clickable" to={paths.void.path}>
+                                    Privacy Policy
+                                </Link>{" "}
+                                and{" "}
+                                <Link className="inline-clickable" to={paths.void.path}>
+                                    Fees
+                                </Link>
+                            </div>
                         }
                     />
                     <Button type="submit" stretch>

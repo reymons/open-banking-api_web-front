@@ -24,9 +24,18 @@
     }
 }
 
-.link-primary {
+.inline-clickable {
     color: var(--color-primary);
     font-weight: 500;
+}
+
+button.inline-clickable {
+    border: none;
+    background-color: transparent;
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
 }
 
 // Text-related

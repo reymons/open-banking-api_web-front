@@ -1,6 +1,8 @@
 import { useState } from "react";
+import cn from "classnames";
 import { Input } from "../input";
 import { px2rem } from "@/lib/css";
+import sl from "./password-input.module.scss";
 
 type Props = PartialBy<
     Omit<React.ComponentProps<typeof Input.WithSideContent>, "type">,
@@ -44,12 +46,20 @@ const WithRecover: React.FC<WithRecoverProps> = ({ onRecover, ...rest }) => {
     return (
         <PasswordInput
             {...rest}
-            side={
-                <button type="button" onClick={() => onRecover()}>
-                    | Forgot?
-                </button>
-            }
             pr={`${px2rem(120)}rem`}
+            side={
+                <div>
+                    <span className="text-hint">|</span>
+                    <button
+                        className={cn("inline-clickable", sl.recoverBtn)}
+                        type="button"
+                        onClick={onRecover}
+                        aria-label="Recover password"
+                    >
+                        Forgot?
+                    </button>
+                </div>
+            }
         />
     );
 };

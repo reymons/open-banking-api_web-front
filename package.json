@@ -4,8 +4,9 @@
     "description": "Main website for Online Banking",
     "scripts": {
         "init:git-hooks": "./scripts/init-git-hooks.sh",
-        "format": "prettier --write \"./**/*.{ts,tsx,css,scss,json}\"",
-        "lint": "eslint --no-warn-ignored $(git diff --name-only HEAD | grep -E '.((t|j)sx?)$' | xargs)",
+        "format:check": "prettier -c $(git diff --name-only --staged --diff-filter=AM | grep -E '.((t|j)sx?|json|scss)$' | xargs)",
+        "format:write": "prettier -w $(git diff --name-only --staged --diff-filter=AM | grep -E '.((t|j)sx?|json|scss)$' | xargs)",
+        "lint": "eslint --no-warn-ignored $(git diff --name-only --staged --diff-filter=AM | grep -E '.((t|j)sx?)$' | xargs)",
         "test": "jest",
         "build": "NODE_ENV=production tsx ./build/cmd/build.ts",
         "dev": "NODE_ENV=development tsx watch ./build/cmd/dev-server.ts",

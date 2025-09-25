@@ -1,6 +1,6 @@
 import * as yup from "yup";
+import cn from "classnames";
 import { Logo } from "@ui/logo";
-import { Text } from "@ui/text";
 import { Socials } from "../socials";
 import { Form } from "@ui/form";
 import { InputRaw } from "@ui/form/input";
@@ -42,9 +42,7 @@ export const Footer = () => {
                 <div className={sl.mainInfo}>
                     <div className={sl.links}>
                         <nav aria-label="Help">
-                            <Text color="primary" fw={700}>
-                                HELP
-                            </Text>
+                            <div color="primary fw-700">HELP</div>
                             <ul>
                                 <FooterLink href={paths.void.path} text="Help Center" />
                                 <FooterLink href={paths.void.path} text="Contact Us" />
@@ -52,9 +50,7 @@ export const Footer = () => {
                             </ul>
                         </nav>
                         <nav aria-label="About">
-                            <Text color="primary" fw={700}>
-                                ABOUT
-                            </Text>
+                            <div color="primary fw-700">ABOUT</div>
                             <ul>
                                 <FooterLink href={paths.void.path} text="About Open Banking" />
                                 <FooterLink href={paths.void.path} text="Terms & Conditions" />
@@ -64,21 +60,17 @@ export const Footer = () => {
                     </div>
                     <Logo />
                     <div>
-                        <Text className={sl.date} color="hint" fw={500} fsm="sm">
+                        <div className={cn(sl.date, "text-hint fsm-sm fw-500")}>
                             {new Date().getFullYear()} Open Banking. All rights reserved.
-                        </Text>
+                        </div>
                         <Socials />
                     </div>
                 </div>
                 <div className={sl.ctaBlock}>
                     <MainImage />
                     <div className={sl.content}>
-                        <Text fs="xl" fsm="sm">
-                            New to Open Banking?
-                        </Text>
-                        <Text as="h3" fs="3xl" fsm="md">
-                            Enter your Email and{"\n"}Get Started Now
-                        </Text>
+                        <div className="fs-xl fsm-sm">New to Open Banking?</div>
+                        <h3 className="fs-3xl fsm-md">Enter your Email and{"\n"}Get Started Now</h3>
                         <Form
                             defaultValues={{ email: "" }}
                             schema={yup.object({

@@ -1,7 +1,6 @@
 import cn from "classnames";
 import { paths } from "@/config/paths";
 import { Header } from "@/comp/layout/header";
-import { Text } from "@ui/text";
 import { LinkButton } from "@ui/link-button";
 import { Link } from "react-router";
 import { Footer } from "@/comp/layout/footer";
@@ -26,12 +25,8 @@ const Service = ({
                 <img src={imgSrc} width={55} height={55} loading="lazy" alt="service" aria-hidden />
             </picture>
             <div>
-                <Text fs="xl" fsm="lg" fw={700} color="primary">
-                    {title}
-                </Text>
-                <Text className={sl.desc} fsm="sm">
-                    {description}
-                </Text>
+                <div className="fs-xl fsm-lg fw-700 text-primary">{title}</div>
+                <div className={cn(sl.desc, "fsm-sm")}>{description}</div>
             </div>
         </li>
     );
@@ -39,14 +34,14 @@ const Service = ({
 
 const FAQItem = ({ text, href }: { text: string; href: string }) => {
     return (
-        <Text className={sl.faqItem} as="li" fsm="sm">
+        <li className={cn(sl.faqItem, "fsm-sm")}>
             <Link to={href}>
                 {text}
                 <svg width="16" height="14">
                     <use href={`${require("@/assets/images/arrow-icons.svg")}#side`} />
                 </svg>
             </Link>
-        </Text>
+        </li>
     );
 };
 
@@ -112,15 +107,15 @@ const HomePage = () => {
                 <section className={sl.bannerWrapper}>
                     <div className={cn("cnt", sl.banner)}>
                         <div>
-                            <Text className={sl.bankName} fs="lg" fsm="md" fw={500}>
+                            <div className={cn(sl.bankName, "fs-lg fsm-md fw-500")}>
                                 Open Banking
-                            </Text>
+                            </div>
                             <h1>Experience{"\n"}hassle-free banking</h1>
-                            <Text className={sl.subTitle} fs="md" fsm="sm">
+                            <p className={cn(sl.subTitle, "fs-md fsm-sm")}>
                                 Experience simple, secure, and stress-free banking. Say goodbye
                                 {"\n"}to long queues and complex procedures and hello to hassle-free
                                 {"\n"} banking with Open Banking.
-                            </Text>
+                            </p>
                             <div className={sl.ctaBtns}>
                                 <LinkButton href={paths.register.path}>Get Started</LinkButton>
                                 <LinkButton kind="transparent" href={paths.void.path}>
@@ -182,22 +177,16 @@ const HomePage = () => {
                         </div>
                         <div className={sl.faqContent}>
                             <div className={sl.faqContentText}>
-                                <Text
-                                    fs="xl"
-                                    color="primary"
-                                    fw={700}
-                                    as={Link}
-                                    asProps={{ to: paths.void.path }}
-                                >
+                                <Link className="fs-xl text-primary fw-700" to={paths.void.path}>
                                     How do I sign up for an account with Open Banking?
-                                </Text>
-                                <Text className={sl.faqDesc} fsm="sm">
+                                </Link>
+                                <p className={cn(sl.faqDesc, "fsm-sm")}>
                                     You can sign up for an account with Open Banking online by
                                     visiting our website and filling out the online application
                                     form. Once your application is approved, you will receive
                                     instructions for setting up your account and accessing our
                                     online banking platform.
-                                </Text>
+                                </p>
                             </div>
                             <ul>
                                 <FAQItem

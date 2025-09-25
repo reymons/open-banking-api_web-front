@@ -4,4 +4,4 @@ set -eu
 set -o pipefail
 
 pnpm run lint
-pnpm run format
+pnpm run format:check

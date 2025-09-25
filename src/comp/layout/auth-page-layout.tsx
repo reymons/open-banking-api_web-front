@@ -1,6 +1,5 @@
 import cn from "classnames";
 import sl from "./auth-page-layout.module.scss";
-import { Text } from "@ui/text";
 import { Logo } from "@ui/logo";
 import { Socials } from "../socials";
 import { PrimaryContainer } from "@ui/primary-container";
@@ -30,22 +29,20 @@ export const AuthPageLayout = ({ title, subTitle, form, hint }: Props) => {
                 <div className={sl.left}>
                     <Logo />
                     <div>
-                        <Text fs="lg" fw={500} color="primary">
-                            Open Banking
-                        </Text>
+                        <div className="fs-lg fw-500 text-primary">Open Banking</div>
                         <h1 className={sl.title}>{title}</h1>
-                        <Text className={sl.subTitle}>{subTitle}</Text>
+                        <div className={sl.subTitle}>{subTitle}</div>
                     </div>
                     <Socials className={sl.socials} />
                 </div>
                 <PrimaryContainer className={sl.formCnt} title={form.title} w={787}>
                     {form.element}
-                    <Text className={sl.authLink} color="hint" fsm="sm">
+                    <div className={cn(sl.authLink, "text-hint fsm-sm")}>
                         {hint.text}{" "}
-                        <Link to={hint.linkHref} className="link-primary">
+                        <Link to={hint.linkHref} className="inline-clickable">
                             {hint.linkText}
                         </Link>
-                    </Text>
+                    </div>
                 </PrimaryContainer>
             </div>
         </main>
