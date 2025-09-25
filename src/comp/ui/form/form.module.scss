@@ -1,7 +1,12 @@
+@use "@/styles/device.scss";
 @use "@/styles/unit.scss";
 
 .form {
     display: flex;
     flex-direction: column;
     gap: unit.rem(22);
+
+    @include device.mobile {
+        gap: unit.rem(10);
+    }
 }

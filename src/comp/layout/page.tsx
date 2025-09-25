@@ -9,7 +9,7 @@ type Props = {
 export const Page = ({ children, title, description }: Props) => {
     return (
         <>
-            <title>{title}</title>
+            <title>{`Open Banking | ${title}`}</title>
             <meta name="description" content={description} />
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description} />

@@ -92,6 +92,7 @@
         @include device.mobile {
             padding: 0;
             padding-bottom: unit.rem(16);
+            gap: unit.rem(10);
         }
     }
 

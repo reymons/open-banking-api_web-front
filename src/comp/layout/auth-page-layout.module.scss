@@ -1,0 +1,83 @@
+@use "@/styles/unit.scss";
+@use "@/styles/device.scss";
+@use "@/styles/scrollbar.scss";
+
+.wrapper {
+    position: relative;
+    background-color: var(--color-secondary);
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    @include scrollbar.custom;
+
+    @include device.mobile {
+        background-color: unset;
+        align-items: flex-start;
+        padding: unit.rem(16) 0;
+    }
+}
+
+.bg {
+    position: absolute;
+    inset: 0;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include device.mobile {
+        display: none;
+    }
+}
+
+.title {
+    margin-top: unit.rem(10);
+    margin-bottom: unit.rem(32);
+    font-size: unit.rem(58);
+    white-space: pre-line;
+}
+
+.subTitle {
+    white-space: pre-line;
+
+    @include device.mobile {
+        white-spce: unset;
+    }
+}
+
+.authLink {
+    margin-top: unit.rem(16);
+}
+
+.socials {
+    padding-top: unit.rem(32);
+}
+
+@include device.mobile {
+    .formCnt {
+        margin-top: 6svh;
+        width: unit.rem(600) !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    .logoMobile {
+        display: block;
+    }
+}
+
+@include device.desktop {
+    .inner {
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        gap: unit.rem(32);
+    }
+
+    .logoMobile {
+        display: none;
+    }
+}

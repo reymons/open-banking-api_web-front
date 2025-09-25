@@ -1,3 +1,4 @@
+import cn from "classnames";
 import { Img } from "./image";
 import sl from "./socials.module.scss";
 
@@ -11,9 +12,13 @@ const Social = ({ imgSrc, href, label }: { imgSrc: string; href: string; label: 
     );
 };
 
-export const Socials = () => {
+type Props = {
+    className?: string;
+};
+
+export const Socials = ({ className }: Props) => {
     return (
-        <ul className={sl.socials}>
+        <ul className={cn(className, sl.socials)}>
             <Social
                 imgSrc={require("@/assets/images/socials/fb.png")}
                 href="https://facebook.com"

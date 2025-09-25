@@ -22,11 +22,16 @@ jobs:
         run: pnpm test # TODO: create seprate jobs for linting and testing
       - name: Build
         run: pnpm build
-      - name: Upload build artifacts
+      - name: Upload build
         uses: actions/upload-artifact@v4
         with:
-          name: build.art
+          name: build
           path: ./dist
+      - name: Upload CNAME # Prevent CNAME deletion after the deployment on gh-pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: CNAME
+          path: ./CNAME 
 
   deploy:
     needs: build
@@ -36,11 +41,16 @@ jobs:
     steps:
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Download build artifacts
+      - name: Download build
         uses: actions/download-artifact@v4
         with:
-          name: build.art
+          name: build
           path: ./_static
+      - name: Download CNAME
+        uses: actions/download-artifact@v4
+        with:
+          name: CNAME
+          path: .
       - run: mv ./_static/index.html index.html
       - run: ls -l
       - name: Deploy to GitHub Pages

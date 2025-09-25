@@ -1,4 +1,5 @@
 @use "@/styles/unit.scss";
+@use "@/styles/device.scss";
 
 .wrapper {
     background-color: var(--color-white);
@@ -17,4 +18,9 @@
     font-size: unit.rem(26);
     font-weight: 700;
     margin-bottom: unit.rem(30);
+
+    @include device.mobile {
+        font-size: unit.rem(20);
+        margin-bottom: unit.rem(20);
+    }
 }

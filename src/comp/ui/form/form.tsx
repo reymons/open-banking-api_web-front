@@ -2,6 +2,7 @@ import type { InferType, ObjectSchema } from "yup";
 import type { UseFormProps, FieldValues, SubmitHandler, UseFormReturn } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, FormProvider } from "react-hook-form";
+import sl from "./form.module.scss";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Schema = ObjectSchema<any>;
@@ -29,10 +30,7 @@ export const Form = <S extends Schema>({
 
     return (
         <FormProvider {...form}>
-            <form
-                style={{ display: "flex", flexDirection: "column", gap: "1.15rem" }}
-                onSubmit={form.handleSubmit(onSubmit)}
-            >
+            <form className={sl.form} onSubmit={form.handleSubmit(onSubmit)}>
                 {children(form)}
             </form>
         </FormProvider>

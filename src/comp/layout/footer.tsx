@@ -2,13 +2,12 @@ import * as yup from "yup";
 import { Logo } from "@ui/logo";
 import { Text } from "@ui/text";
 import { Socials } from "../socials";
-import { Img } from "../image";
 import { Form } from "@ui/form";
 import { InputRaw } from "@ui/form/input";
-import sl from "./footer.module.scss";
 import { Button } from "@ui/button";
 import { Link } from "react-router";
 import { paths } from "@/config/paths";
+import sl from "./footer.module.scss";
 
 const FooterLink = ({ text, href }: { text: string; href: string }) => {
     return (
@@ -17,6 +16,22 @@ const FooterLink = ({ text, href }: { text: string; href: string }) => {
                 {text}
             </Link>
         </li>
+    );
+};
+
+const MainImage = () => {
+    const png1x = require("@/assets/images/footer/cities-1x.png");
+    const png2x = require("@/assets/images/footer/cities-2x.png");
+    const webp1x = require("@/assets/images/footer/cities-1x.webp");
+    const webp2x = require("@/assets/images/footer/cities-2x.webp");
+    const stub = require("@/assets/images/stub.png");
+
+    return (
+        <picture>
+            <source srcSet={`${webp1x}, ${webp2x} 2x`} type="image/webp" media="(width > 1024px)" />
+            <source srcSet={`${png1x}, ${png2x} 2x`} type="image/png" media="(width > 1024px)" />
+            <img src={stub} width="100%" height="100%" alt="cities" aria-hidden />
+        </picture>
     );
 };
 
@@ -56,16 +71,12 @@ export const Footer = () => {
                     </div>
                 </div>
                 <div className={sl.ctaBlock}>
-                    <Img
-                        src={require("@/assets/images/cities.png")}
-                        w="100%"
-                        h="100%"
-                        alt=""
-                        aria-hidden
-                    />
+                    <MainImage />
                     <div className={sl.content}>
-                        <Text fs="xl">New to Open Banking?</Text>
-                        <Text as="h3" fs="3xl">
+                        <Text fs="xl" fsm="sm">
+                            New to Open Banking?
+                        </Text>
+                        <Text as="h3" fs="3xl" fsm="md">
                             Enter your Email and{"\n"}Get Started Now
                         </Text>
                         <Form

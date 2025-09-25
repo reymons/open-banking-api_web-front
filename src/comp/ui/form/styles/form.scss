@@ -1,4 +1,5 @@
 @use "@/styles/unit.scss";
+@use "@/styles/device.scss";
 
 $color-placeholder: var(--color-black-300);
 $color-error: var(--color-danger);
@@ -8,4 +9,8 @@ $color-error: var(--color-danger);
     border: 1px solid $color-placeholder;
     background-color: var(--color-white);
     font-size: unit.rem(16);
+
+    @include device.mobile {
+        font-size: unit.rem(12);
+    }
 }

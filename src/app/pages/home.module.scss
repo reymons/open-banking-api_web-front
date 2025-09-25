@@ -121,6 +121,10 @@
                 margin-top: unit.rem(16);
             }
 
+            picture {
+                flex-shrink: 0;
+            }
+
             @include device.mobile {
                 gap: unit.rem(16);
 
