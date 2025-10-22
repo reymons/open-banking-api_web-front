@@ -1,0 +1,22 @@
+@use "@/styles/unit.scss";
+@use "@/styles/device.scss";
+@use "./styles/form.scss";
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: unit.rem(10);
+    border: none;
+}
+
+.input {
+    @extend %element;
+    width: unit.rem(64);
+    height: unit.rem(64);
+    text-align: center;
+
+    @include device.mobile {
+        width: unit.rem(42);
+        height: unit.rem(42);
+    }
+}

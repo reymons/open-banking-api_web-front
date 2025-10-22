@@ -1,15 +1,27 @@
 import * as yup from "yup";
-import { Form, EmailInput, PasswordInput } from "@ui/form";
-import { Button } from "@ui/button";
+import { type InferType } from "yup";
+import { Form, EmailInput, PasswordInput, SubmitButton, FormError } from "@ui/form";
+import { useLogin } from "../api/auth";
 
 const schema = yup.object({
     email: yup.string().required().email().label("Email"),
     password: yup.string().required().label("Password"),
 });
 
-export const LoginForm = () => {
+type Props = {
+    onSuccess: () => void;
+};
+
+export const LoginForm = ({ onSuccess }: Props) => {
+    const loginUser = useLogin();
+
+    const handleSubmit = async (data: InferType<typeof schema>) => {
+        await loginUser(data);
+        onSuccess();
+    };
+
     return (
-        <Form schema={schema} defaultValues={{ email: "", password: "" }} onSubmit={() => {}}>
+        <Form schema={schema} defaultValues={{ email: "", password: "" }} onSubmit={handleSubmit}>
             {({ register, formState }) => (
                 <>
                     <EmailInput
@@ -27,9 +39,8 @@ export const LoginForm = () => {
                         autoComplete="current-password"
                         onRecover={() => {}}
                     />
-                    <Button type="submit" stretch>
-                        Submit
-                    </Button>
+                    <FormError />
+                    <SubmitButton>Log in</SubmitButton>
                 </>
             )}
         </Form>

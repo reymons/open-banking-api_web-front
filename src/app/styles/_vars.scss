@@ -1,12 +1,16 @@
 // Global variables
 
 @use "@/styles/unit.scss";
+@use "@/styles/device.scss";
 
 html {
+    --modal-root-z-index: 996;
+
     --color-white: #ffffff;
 
     --color-red-300: hsl(355, 76%, 61%);
 
+    --color-green-090: hsl(163, 54%, 97%);
     --color-green-100: hsl(158, 56%, 90%);
     --color-green-400: hsl(158, 56%, 46%);
     --color-green-500: hsl(158, 56%, 36%);
@@ -15,6 +19,7 @@ html {
     --color-black-300: hsl(0, 0%, 72%); // #B8B8B8
     --color-black-400: hsl(0, 0%, 62%);
     --color-black-600: hsl(0, 0%, 33%);
+    --color-black-800: hsl(0, 0%, 15%);
 
     --color-purple-600: hsl(264, 55%, 31%); // #46237A
 
@@ -26,7 +31,9 @@ html {
     --color-text-secondary: var(--color-white);
     --color-text-hint: var(--color-black-300);
     --color-danger: var(--color-red-300);
-
+    --color-flat-icon: #000;
+    --color-form-input-icon: var(--color-black-300);
+    --color-heading: var(--color-black-800);
     --border-radius-sm: 0.375em; // 6px
     --border-radius-md: 0.75em; // 12px
 
@@ -40,4 +47,22 @@ html {
     $offsetX: 16;
     --container-offset-x: #{unit.rem($offsetX)};
     --container-width: #{unit.rem(1540 - $offsetX * 2)};
+
+    --profile-width: var(--container-width);
+    --profile-offset-x: var(--container-offset-x);
+    --profile-left-sidebar-width: #{unit.rem(276)};
+    --profile-right-sidebar-width: #{unit.rem(440)};
+    --profile-content-gap: #{unit.rem(60)};
+    --profile-header-height: #{unit.rem(100)};
+    --profile-background: var(--color-green-090);
+
+    @media (max-width: 1320px) {
+        --profile-left-sidebar-width: #{unit.rem(200)};
+        --profile-right-sidebar-width: #{unit.rem(350)};
+    }
+
+    @include device.mobile {
+        --header-height: #{unit.rem(62)};
+        --profile-header-height: var(--header-height);
+    }
 }

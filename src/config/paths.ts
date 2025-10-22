@@ -1,3 +1,5 @@
+import { routeWithQuery } from "@/lib/location";
+
 export const paths = {
     home: {
         path: "/",
@@ -10,11 +12,24 @@ export const paths = {
     },
     login: {
         path: "/login",
+        get: (q: { redirect?: string }) => routeWithQuery("/login", q),
     },
     register: {
         path: "/register",
     },
     void: {
         path: "/void",
+    },
+    profile: {
+        path: "/profile",
+        accounts: {
+            path: "/profile/accounts",
+        },
+        transactions: {
+            path: "/profile/transactions",
+        },
+        settings: {
+            path: "/profile/settings",
+        },
     },
 };

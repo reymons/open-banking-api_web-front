@@ -11,6 +11,15 @@ html {
     text-size-adjust: none;
 }
 
+em {
+    font-style: normal;
+}
+
+em,
+strong {
+    font-weight: 700;
+}
+
 /* Remove default margin in favour of better control in authored CSS */
 body,
 h1,
@@ -76,6 +85,7 @@ textarea,
 select {
     font-family: inherit;
     font-size: inherit;
+    color: inherit;
 }
 
 /* Make sure textareas without a rows attribute are not tiny */

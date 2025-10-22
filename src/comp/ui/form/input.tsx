@@ -14,10 +14,10 @@ type RawProps = {
     reg: UseFormRegisterReturn;
     style?: React.CSSProperties;
     invalid?: boolean;
-    "aria-describedby"?: string;
+    "aria-labelledby"?: string;
 };
 
-type Props = FormFieldExtProps & Omit<RawProps, "aria-describedby" | "invalid">;
+type Props = FormFieldExtProps & Omit<RawProps, "aria-labelledby" | "invalid">;
 
 export const InputRaw = ({
     type,
@@ -50,7 +50,7 @@ export const Input = ({ error, label, ...rest }: Props) => {
 
     return (
         <FormField error={error} label={label} labelId={labelId}>
-            <InputRaw {...rest} aria-describedby={labelId} invalid={!!error} />
+            <InputRaw {...rest} aria-labelledby={labelId} invalid={!!error} />
         </FormField>
     );
 };

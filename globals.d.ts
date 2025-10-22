@@ -12,5 +12,4 @@ declare module "*.png" {
     export default url;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PartialBy<T extends Record<any, any>, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;

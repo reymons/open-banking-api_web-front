@@ -1,0 +1,13 @@
+@use "@/styles/unit.scss";
+@use "@/styles/device.scss";
+
+.img {
+    object-fit: cover;
+    height: unit.rem(54);
+    width: unit.rem(54);
+
+    @include device.mobile {
+        height: unit.rem(40);
+        width: unit.rem(40);
+    }
+}

@@ -3,7 +3,7 @@
 
 .wrapper {
     background-color: var(--color-white);
-    padding: unit.rem(42);
+    padding: unit.rem(56);
     border-radius: var(--border-radius-md);
     max-width: 100%;
     max-height: 100%;
@@ -15,12 +15,12 @@
 
 .title {
     color: var(--color-primary);
-    font-size: unit.rem(26);
+    font-size: unit.rem(28);
     font-weight: 700;
     margin-bottom: unit.rem(30);
 
     @include device.mobile {
-        font-size: unit.rem(20);
+        font-size: unit.rem(22);
         margin-bottom: unit.rem(20);
     }
 }

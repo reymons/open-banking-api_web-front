@@ -18,6 +18,7 @@
     background: none;
     border: none;
     display: inline-flex;
+    height: max-content;
 
     &:not(:disabled) {
         cursor: pointer;
@@ -36,6 +37,25 @@ button.inline-clickable {
     &:not(:disabled) {
         cursor: pointer;
     }
+}
+
+.unstyled-button {
+    border: none;
+    background: transparent;
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+.sr-only {
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
 }
 
 // Text-related

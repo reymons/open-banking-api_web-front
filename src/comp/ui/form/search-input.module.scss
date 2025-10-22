@@ -1,0 +1,14 @@
+@use "@/styles/unit.scss";
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: unit.rem(20);
+
+    input {
+        border: none;
+        background: transparent;
+        font-weight: 500;
+        outline: none;
+    }
+}

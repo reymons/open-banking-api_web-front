@@ -1,7 +1,8 @@
 import { useState } from "react";
 import cn from "classnames";
-import { Input } from "../input";
 import { px2rem } from "@/lib/css";
+import { FlatIcon } from "@ui/flat-icon";
+import { Input } from "../input";
 import sl from "./password-input.module.scss";
 
 type Props = PartialBy<
@@ -23,14 +24,11 @@ export const PasswordInput = ({ side, pr, ...rest }: Props) => {
                     <button
                         className="icon-btn"
                         type="button"
-                        onClick={() => setVisible(f => !f)}
+                        aria-pressed={visible}
                         aria-label={visible ? "Hide password" : "Show password"}
+                        onClick={() => setVisible(f => !f)}
                     >
-                        <svg width={21} height={21}>
-                            <use
-                                href={`${require("@/assets/images/flat-icons.svg")}#lock-locked`}
-                            />
-                        </svg>
+                        <FlatIcon type={visible ? "lock-unlocked" : "lock-locked"} />
                     </button>
                 </>
             }

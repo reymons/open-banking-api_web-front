@@ -1,0 +1,34 @@
+@use "@/styles/unit.scss";
+@use "@/styles/device.scss";
+
+.wrapper {
+    background-color: var(--profile-background);
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    padding-bottom: unit.rem(32);
+    gap: unit.rem(60);
+
+    @include device.mobile {
+        padding-bottom: unit.rem(16);
+        gap: unit.rem(10);
+    }
+}
+
+.cnt {
+    max-width: var(--profile-width);
+    width: 100%;
+    padding: 0 var(--profile-offset-x);
+    margin: 0 auto;
+    flex-grow: 1;
+    display: flex;
+    gap: var(--profile-content-gap);
+}
+
+.nav {
+    width: var(--profile-left-sidebar-width);
+
+    @include device.mobile {
+        display: none;
+    }
+}

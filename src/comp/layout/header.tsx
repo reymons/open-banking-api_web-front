@@ -1,12 +1,20 @@
 import cn from "classnames";
+import { useUser } from "@/stores/user";
 import { Link } from "react-router";
 import { paths } from "@/config/paths";
 import { LoginButton } from "@/features/auth";
 import { Logo } from "@ui/logo";
+import { ProfileControl } from "./profile/profile-control";
 import sl from "./header.module.scss";
 
 type Props = {
     className?: string;
+};
+
+const ProfileOrLogin = () => {
+    const user = useUser();
+
+    return user ? <ProfileControl /> : <LoginButton />;
 };
 
 export const Header = ({ className }: Props) => {
@@ -24,7 +32,7 @@ export const Header = ({ className }: Props) => {
                         </li>
                     </ul>
                 </nav>
-                <LoginButton />
+                <ProfileOrLogin />
             </div>
         </header>
     );

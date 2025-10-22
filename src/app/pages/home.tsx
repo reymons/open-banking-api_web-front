@@ -5,6 +5,7 @@ import { LinkButton } from "@ui/link-button";
 import { Link } from "react-router";
 import { Footer } from "@/comp/layout/footer";
 import { Page } from "@/comp/layout/page";
+import { FlatIcon } from "@ui/flat-icon";
 import sl from "./home.module.scss";
 
 const Service = ({
@@ -37,29 +38,25 @@ const FAQItem = ({ text, href }: { text: string; href: string }) => {
         <li className={cn(sl.faqItem, "fsm-sm")}>
             <Link to={href}>
                 {text}
-                <svg width="16" height="14">
-                    <use href={`${require("@/assets/images/arrow-icons.svg")}#side`} />
-                </svg>
+                <FlatIcon type="arrow-small-right" />
             </Link>
         </li>
     );
 };
 
 const BannerImage = () => {
-    // TODO: add ImageMinimizerWebpackPlugin
-    const png1x = require("@/assets/images/main-banner/1x.png");
-    const png2x = require("@/assets/images/main-banner/2x.png");
-    const webp1x = require("@/assets/images/main-banner/1x.webp");
-    const webp2x = require("@/assets/images/main-banner/2x.webp");
-    const avif1x = require("@/assets/images/main-banner/1x.avif");
-    const avif2x = require("@/assets/images/main-banner/2x.avif");
+    const png = require("@/assets/images/main-banner.png");
+    const webp1x = require("@/assets/images/main-banner.png?as=webp&w=738");
+    const webp2x = require("@/assets/images/main-banner.png?as=webp&w=1476");
+    const avif1x = require("@/assets/images/main-banner.png?as=avif&w=738q=50");
+    const avif2x = require("@/assets/images/main-banner.png?as=avif&w=1476&q=50");
     const stub = require("@/assets/images/stub.png");
 
     return (
         <picture>
             <source srcSet={`${avif1x}, ${avif2x} 2x`} type="image/avif" media="(width > 786px)" />
             <source srcSet={`${webp1x}, ${webp2x} 2x`} type="image/webp" media="(width > 786px)" />
-            <source srcSet={`${png1x}, ${png2x} 2x`} type="image/png" media="(width > 786px)" />
+            <source srcSet={png} type="image/png" media="(width > 786px)" />
             <img src={stub} alt="two cards of Open Banking" aria-hidden />
         </picture>
     );

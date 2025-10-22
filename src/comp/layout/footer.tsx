@@ -42,7 +42,7 @@ export const Footer = () => {
                 <div className={sl.mainInfo}>
                     <div className={sl.links}>
                         <nav aria-label="Help">
-                            <div color="primary fw-700">HELP</div>
+                            <div className="text-primary fw-700">HELP</div>
                             <ul>
                                 <FooterLink href={paths.void.path} text="Help Center" />
                                 <FooterLink href={paths.void.path} text="Contact Us" />
@@ -50,7 +50,7 @@ export const Footer = () => {
                             </ul>
                         </nav>
                         <nav aria-label="About">
-                            <div color="primary fw-700">ABOUT</div>
+                            <div className="text-primary fw-700">ABOUT</div>
                             <ul>
                                 <FooterLink href={paths.void.path} text="About Open Banking" />
                                 <FooterLink href={paths.void.path} text="Terms & Conditions" />

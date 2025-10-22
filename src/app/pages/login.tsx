@@ -1,9 +1,16 @@
+import { paths } from "@/config/paths";
 import { Page } from "@/comp/layout/page";
 import { AuthPageLayout } from "@/comp/layout/auth-page-layout";
-import { LoginForm } from "@/features/auth/comp/login-form";
-import { paths } from "@/config/paths";
+import { LoginForm } from "@/features/auth";
+import { useNavigate } from "react-router";
 
 const LoginPage = () => {
+    const navigate = useNavigate();
+
+    const handleSuccess = () => {
+        navigate(paths.profile.path);
+    };
+
     return (
         <Page title="Login" description="Log in to your Open Banking account">
             <AuthPageLayout
@@ -11,12 +18,14 @@ const LoginPage = () => {
                 subTitle="Enter your details to log in to your Banking Dashboard!"
                 form={{
                     title: "Log in",
-                    element: <LoginForm />,
+                    element: <LoginForm onSuccess={handleSuccess} />,
                 }}
                 hint={{
                     text: "Don't have an account?",
-                    linkHref: paths.register.path,
-                    linkText: "Register",
+                    link: {
+                        href: paths.register.path,
+                        text: "Register",
+                    },
                 }}
             />
         </Page>

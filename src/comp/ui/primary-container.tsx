@@ -9,13 +9,26 @@ type Props = {
     h?: number; // px
     w?: number; // px
     glow?: boolean;
+    ref?: React.Ref<HTMLDivElement | null>;
+    style?: React.CSSProperties;
 };
 
-export const PrimaryContainer = ({ className, title, children, w, h, glow = true }: Props) => {
+export const PrimaryContainer = ({
+    className,
+    title,
+    children,
+    w,
+    h,
+    glow = true,
+    ref,
+    style,
+}: Props) => {
     return (
         <div
             className={cn(className, sl.wrapper, glow && sl.glow)}
+            ref={ref}
             style={{
+                ...style,
                 width: w ? `${px2rem(w)}rem` : undefined,
                 height: h ? `${px2rem(h)}rem` : undefined,
             }}

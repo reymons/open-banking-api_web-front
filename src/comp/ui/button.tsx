@@ -37,6 +37,7 @@ export const Button = ({
     beforeEnd,
     href,
     stretch,
+    disabled,
     ...rest
 }: Props) => {
     const navigate = useNavigate();
@@ -50,6 +51,7 @@ export const Button = ({
             {...rest}
             {...(href ? getLinkProps(navigate, href) : {})}
             aria-busy={loading}
+            disabled={disabled || loading}
         >
             {loading ? (
                 <Preloader />

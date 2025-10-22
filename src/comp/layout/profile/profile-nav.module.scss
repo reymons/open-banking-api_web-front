@@ -1,0 +1,34 @@
+@use "@/styles/unit.scss";
+@use "@/styles/device.scss";
+
+$gap: unit.rem(32);
+
+.wrapper {
+    --color-flat-icon: var(--color-text-primary);
+    display: flex;
+    flex-direction: column;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: unit.rem(32);
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: $gap;
+            text-decoration: none;
+        }
+
+        @include device.mobile {
+            gap: unit.rem(22);
+        }
+    }
+}
+
+.logoutBtn {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: $gap;
+}

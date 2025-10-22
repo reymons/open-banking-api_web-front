@@ -1,98 +1,63 @@
 import * as yup from "yup";
-import { Link } from "react-router";
-import { Button } from "@ui/button";
-import { Form, Checkbox, Input, PasswordInput, EmailInput } from "@ui/form";
-import { px2rem } from "@/lib/css";
-import { paths } from "@/config/paths";
+import { useState } from "react";
+import { BaseUserInfoForm, schema as baseInfoSchema } from "./base-user-info-form";
+import { EmailVerificationForm, schema as verifSchema } from "./email-verification-form";
+import { useRegister } from "../api/auth";
+import { useSubmitVerification } from "../api/verification";
 
-const schema = yup.object({
-    firstName: yup.string().required().label("First name"),
-    lastName: yup.string().required().label("Last name"),
-    email: yup.string().required().email().label("Email"),
-    password: yup.string().required().min(6).max(100).label("Password"),
-    termsAccepted: yup.boolean().oneOf([true]),
-});
+type BaseInfo = yup.InferType<typeof baseInfoSchema>;
+type Verification = yup.InferType<typeof verifSchema>;
 
-export const RegisterForm = () => {
-    const sprite = require("@/assets/images/flat-icons.svg");
+export type FormStep = "base-info" | "verification";
+
+export const DEFAULT_STEP: FormStep = "base-info";
+
+type Props = {
+    onSuccess: () => void;
+    onStepChange?: (step: FormStep) => void;
+};
+
+export const RegisterForm = ({ onSuccess, onStepChange }: Props) => {
+    const [step, setStep] = useState<FormStep>(DEFAULT_STEP);
+    const [baseInfo, setBaseInfo] = useState<BaseInfo | null>(null);
+    const registerUser = useRegister();
+    const submitVerification = useSubmitVerification();
+    const email = baseInfo?.email ?? "";
+
+    const changeStep = (step: FormStep) => {
+        setStep(step);
+        onStepChange?.(step);
+    };
+
+    const handleBaseInfoSubmit = async (info: BaseInfo) => {
+        if (email !== info.email) {
+            await registerUser(info);
+        }
+        setBaseInfo(info);
+        changeStep("verification");
+    };
+
+    const handleVerificationSubmit = async (verif: Verification) => {
+        await submitVerification(email, verif.code);
+        onSuccess();
+    };
+
+    const handleChangeEmail = () => {
+        changeStep("base-info");
+    };
 
     return (
-        <Form
-            schema={schema}
-            defaultValues={{
-                firstName: "",
-                lastName: "",
-                email: "",
-                password: "",
-                termsAccepted: false,
-            }}
-            onSubmit={data => console.log(data)}
-        >
-            {({ register, formState }) => (
-                <>
-                    <Input.WithSideContent
-                        reg={register("firstName")}
-                        label="First name"
-                        placeholder="Enter your first name here"
-                        error={formState.errors.firstName}
-                        pr={`${px2rem(54)}rem`}
-                        side={
-                            <svg width={21} height={21}>
-                                <use href={`${sprite}#user`} />
-                            </svg>
-                        }
-                    />
-                    <Input.WithSideContent
-                        reg={register("lastName")}
-                        label="Last name"
-                        placeholder="Enter your last name here"
-                        error={formState.errors.lastName}
-                        pr={`${px2rem(54)}rem`}
-                        side={
-                            <svg width={21} height={21}>
-                                <use href={`${sprite}#user`} />
-                            </svg>
-                        }
-                    />
-                    <EmailInput
-                        label="Email"
-                        placeholder="Enter your email here"
-                        autoComplete="email"
-                        reg={register("email")}
-                        error={formState.errors.email}
-                    />
-                    <PasswordInput
-                        reg={register("password")}
-                        label="Password"
-                        placeholder="Enter your password here"
-                        autoComplete="off"
-                        error={formState.errors.password}
-                    />
-                    <Checkbox.WithLabel
-                        reg={register("termsAccepted")}
-                        error={formState.errors.termsAccepted}
-                        label={
-                            <div>
-                                I agree to all the{" "}
-                                <Link className="inline-clickable" to={paths.void.path}>
-                                    Terms
-                                </Link>
-                                ,{" "}
-                                <Link className="inline-clickable" to={paths.void.path}>
-                                    Privacy Policy
-                                </Link>{" "}
-                                and{" "}
-                                <Link className="inline-clickable" to={paths.void.path}>
-                                    Fees
-                                </Link>
-                            </div>
-                        }
-                    />
-                    <Button type="submit" stretch>
-                        Register
-                    </Button>
-                </>
+        <>
+            {step === "base-info" && (
+                <BaseUserInfoForm onSubmit={handleBaseInfoSubmit} defaultValues={baseInfo} />
             )}
-        </Form>
+            {step === "verification" && (
+                <EmailVerificationForm
+                    email={email}
+                    onSubmit={handleVerificationSubmit}
+                    onChangeEmail={handleChangeEmail}
+                />
+            )}
+        </>
     );
 };

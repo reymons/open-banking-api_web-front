@@ -1,0 +1,85 @@
+@use "@/styles/unit.scss";
+@use "@/styles/device.scss";
+
+.header {
+    max-width: var(--profile-width);
+    width: 100%;
+    height: var(--profile-header-height);
+    padding: 0 var(--profile-offset-x);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    > div {
+        display: flex;
+        align-items: center;
+        gap: var(--profile-content-gap);
+        width: 100%;
+    }
+
+    @include device.mobile {
+        justify-content: center;
+    }
+}
+
+.logo {
+    max-width: var(--profile-left-sidebar-width);
+    width: 100%;
+    display: inline-flex;
+
+    @include device.mobile {
+        display: none;
+    }
+}
+
+.info {
+    max-width: var(--profile-right-sidebar-width);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: unit.rem(40);
+
+    @include device.mobile {
+        max-width: unset;
+        width: max-content;
+        margin-left: auto;
+        gap: unit.rem(35);
+    }
+}
+
+.mainContent {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include device.mobile {
+        display: none;
+    }
+}
+
+.accNum,
+.title {
+    font-size: unit.rem(26);
+}
+
+.searchInput {
+    flex-grow: 1;
+
+    @include device.mobile {
+        flex-grow: 0;
+
+        input {
+            display: none;
+        }
+    }
+}
+
+.burger {
+    display: none;
+
+    @include device.mobile {
+        display: inline-flex;
+    }
+}

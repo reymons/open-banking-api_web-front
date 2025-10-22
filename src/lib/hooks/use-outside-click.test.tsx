@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useOutsideClick } from "./use-outside-click";
-import { render, renderHook, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 type HookOptions = PartialBy<Parameters<typeof useOutsideClick>[0], "ref" | "isOpen">;
