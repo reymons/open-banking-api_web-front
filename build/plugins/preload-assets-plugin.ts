@@ -26,6 +26,7 @@ export class PreloadAssetsPlugin {
                     href: string;
                     as: string;
                     priority: number;
+                    type: string;
                 }[] = [];
 
                 for (const asset of cmp.getAssets()) {
@@ -35,23 +36,31 @@ export class PreloadAssetsPlugin {
                         const fullFilename = path.resolve(process.cwd(), sourceFilename);
                         if (fullFilename.startsWith(this.preloadedAssetsDir)) {
                             const ext = path.extname(fullFilename);
-                            // TODO: handle different extensions (if ever needed LOL)
+                            // TODO: This is just a quick solution. Later, add better checks
                             if (ext === ".woff2") {
                                 links.push({
                                     href: asset.name,
                                     as: "font",
                                     priority: 999,
+                                    type: "font/woff2",
+                                });
+                            } else if (ext === ".svg") {
+                                links.push({
+                                    href: asset.name,
+                                    as: "image",
+                                    priority: 998,
+                                    type: "image/svg+xml",
                                 });
                             }
                         }
                     }
                 }
 
-                links.sort((a, b) => a.priority - b.priority);
+                links.sort((a, b) => b.priority - a.priority);
                 const html = links
                     .map(
                         l =>
-                            `<link rel="preload" href="/_static/${l.href}" as="${l.as}" crossorigin="anonymous">`
+                            `<link rel="preload" href="/_static/${l.href}" as="${l.as}" type="${l.type}" crossorigin="anonymous">`
                     )
                     .join("");
                 data.html = data.html.replace("{{ preloaded-assets }}", html);

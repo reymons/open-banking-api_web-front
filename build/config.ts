@@ -1,14 +1,16 @@
 import path from "node:path";
-import type wp from "webpack";
+import { type Configuration, EnvironmentPlugin } from "webpack";
 import HtmlPlugin from "html-webpack-plugin";
 import CssExtractPlugin from "mini-css-extract-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import ImageMinimizerPlugin from "image-minimizer-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { Configuration as DevServerCfg } from "webpack-dev-server";
 import { getCssClass } from "./util";
 import { PreloadAssetsPlugin } from "./plugins/preload-assets-plugin";
 import { RemoveLicensePlugin } from "./plugins/remove-license-plugin";
 import { CriticalPathPlugin } from "./plugins/critical-path-plugin";
+import appCfg from "../app.config";
 
 const isDev = process.env.NODE_ENV === "development";
 const withBundleAnalyzer = !!process.env.BUNDLE_ANALYZER;
@@ -41,7 +43,7 @@ const cssBaseLoaders = [
 const htmlFilename = isDev ? "index.dev.html" : "index.html";
 
 // TODO: separate dev and prod configs
-const cfg: wp.Configuration & { devServer: DevServerCfg } = {
+const cfg: Configuration & { devServer: DevServerCfg } = {
     entry: path.join(rootDir, "src", "app", "index.tsx"),
     output: {
         path: outputDir,
@@ -50,7 +52,7 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
         filename: "js/[name].[contenthash].js",
         chunkFilename: "chunks/js/[id].[contenthash].js",
         cssChunkFilename: "chunks/css/[id].[contenthash].css",
-        assetModuleFilename: "assets/[hash][ext][query]",
+        assetModuleFilename: "assets/[name]/[hash][ext]",
     },
     module: {
         rules: [
@@ -84,7 +86,6 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
                             modules: {
                                 namedExport: false,
                                 auto: true,
-                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                 getLocalIdent(ctx: any, _: any, name: string) {
                                     return getCssClass(name, ctx.resourcePath, isDev);
                                 },
@@ -95,7 +96,7 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
                 ],
             },
             {
-                test: /\.(svg|png|jpe?g|gif|webp|avif|woff2)$/,
+                test: /\.(svg|png|jpe?g|gif|webp|avif|woff2)$/i,
                 type: "asset/resource",
                 sideEffects: true,
             },
@@ -105,6 +106,7 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
         new HtmlPlugin({
             template: path.join(rootDir, htmlFilename),
         }),
+        new EnvironmentPlugin(appCfg.env),
     ],
     mode: isDev ? "development" : "production",
     devtool: isDev ? "inline-source-map" : false,
@@ -120,9 +122,13 @@ const cfg: wp.Configuration & { devServer: DevServerCfg } = {
         historyApiFallback: true,
         compress: true,
     },
-    experiments: {
-        lazyCompilation: isDev,
-    },
+    experiments: !isDev
+        ? undefined
+        : {
+              lazyCompilation: {
+                  entries: false,
+              },
+          },
 };
 
 if (!isDev) {
@@ -173,6 +179,36 @@ if (!isDev) {
                 },
             },
         },
+        minimizer: [
+            new ImageMinimizerPlugin({
+                generator: [
+                    {
+                        preset: "webp",
+                        // @ts-expect-error library types issues
+                        implementation: ImageMinimizerPlugin.sharpGenerate,
+                        options: {
+                            encodeOptions: {
+                                webp: {
+                                    quality: 75,
+                                },
+                            },
+                        },
+                    },
+                    {
+                        preset: "avif",
+                        // @ts-expect-error library types issues
+                        implementation: ImageMinimizerPlugin.sharpGenerate,
+                        options: {
+                            encodeOptions: {
+                                avif: {
+                                    quality: 75,
+                                },
+                            },
+                        },
+                    },
+                ],
+            }),
+        ],
     };
 }
 
