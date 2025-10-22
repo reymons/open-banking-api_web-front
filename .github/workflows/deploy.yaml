@@ -6,6 +6,8 @@ on:
 
 jobs:
   build:
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    environment: production
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -21,6 +23,8 @@ jobs:
       - name: Test
         run: pnpm test # TODO: create seprate jobs for linting and testing
       - name: Build
+        env:
+          HTTP_CLIENT_BASE_URL: ${{ vars.HTTP_CLIENT_BASE_URL }}
         run: pnpm build
       - name: Upload build
         uses: actions/upload-artifact@v4
