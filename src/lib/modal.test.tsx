@@ -8,19 +8,26 @@ import {
     useModal,
     useModalContext,
     useModalState,
+    type ModalProps,
 } from "./modal";
 
 const modalRoot = "modal-root";
 const modalContentId = "target";
 let root: HTMLDivElement | null = null;
 
-const App = ({ content }: { content?: React.FC<any> }) => {
+type AppProps = {
+    modalProps?: Partial<ModalProps>;
+};
+
+const App = ({ modalProps }: AppProps) => {
     const modal = useModal();
-    const Content = content ?? (() => <div data-testid={modalContentId} />);
+    const content = modalProps?.children ?? <div data-testid={modalContentId} />;
 
     return (
         <>
-            <Modal component={Content} ref={modal.ref} />
+            <Modal ref={modal.ref} {...modalProps}>
+                {content}
+            </Modal>
             <button data-testid="open" onClick={() => modal.open()} />
             <button data-testid="close" onClick={() => modal.close()} />
             <button data-testid="toggle" onClick={() => modal.toggle()} />
@@ -108,7 +115,7 @@ describe("Modal", () => {
             return <></>;
         };
 
-        render(<App content={Content} />);
+        render(<App modalProps={{ children: <Content /> }} />);
         await openModal();
         await closeModal();
         expect(closeHandler).toHaveBeenCalledTimes(1);
@@ -122,12 +129,26 @@ describe("Modal", () => {
             return <div data-testid="target" />;
         };
 
-        render(<App content={Content} />);
+        render(<App modalProps={{ children: <Content /> }} />);
         await openModal();
         await closeModal();
         await waitFor(() => {
             expect(screen.queryByTestId("target")).toBe(null);
         });
+    });
+
+    it("shows a modal instantly if defaultOpen is set to 'true'", () => {
+        render(<App modalProps={{ defaultOpen: true }} />);
+        expect(screen.queryByTestId(modalContentId)).toBeInTheDocument();
+    });
+
+    it("renders a modal at the specified 'root' prop", () => {
+        const root = document.createElement("div");
+        document.body.append(root);
+        render(<App modalProps={{ root, defaultOpen: true }} />);
+        const content = screen.getByTestId(modalContentId);
+        expect(root.firstElementChild).toBe(content);
+        root.remove();
     });
 });
 
@@ -184,7 +205,11 @@ describe("useModalState", () => {
 
     it("changes isOpen state on modal toggle", () => {
         const { result } = renderHook(() => useModalState());
-        render(<Modal ref={result.current.ref} component={() => null} />);
+        render(
+            <Modal ref={result.current.ref}>
+                <></>
+            </Modal>
+        );
         act(() => result.current.open());
         expect(result.current.isOpen).toBe(true);
         act(() => result.current.close());

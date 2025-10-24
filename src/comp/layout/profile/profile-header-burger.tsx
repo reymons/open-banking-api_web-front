@@ -20,7 +20,9 @@ export const ProfileHeaderBurger = () => {
             <button className="icon-btn" type="button" onClick={() => modal.toggle()}>
                 <FlatIcon type="menu-burger" />
             </button>
-            <Modal component={BurgerModal} ref={modal.ref} />
+            <Modal ref={modal.ref}>
+                <BurgerModal />
+            </Modal>
         </>
     );
 };

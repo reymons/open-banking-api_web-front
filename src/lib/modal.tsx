@@ -8,11 +8,6 @@ export type ModalControl = {
     toggle: () => void;
 };
 
-type Props = {
-    component: React.FC<any>;
-    ref: React.Ref<ModalControl>;
-};
-
 type CloseHandler = (done: () => void) => void;
 
 const ModalContext = createContext<null | {
@@ -32,12 +27,24 @@ export function setModalRoot(root: HTMLElement | null) {
     modalRoot = root;
 }
 
-export const Modal = ({ component: Component, ref }: Props) => {
-    const [isOpen, setIsOpen] = useState(false);
+export type ModalProps = {
+    children?: React.ReactNode;
+    // Modal controls
+    // Use useModal().ref or useModalState().ref
+    ref: React.Ref<ModalControl>;
+    // Open a modal on mount instantly
+    defaultOpen?: boolean;
+    // Specify a custom root
+    root?: HTMLElement | null;
+};
+
+export const Modal = ({ ref, defaultOpen = false, root = null, children }: ModalProps) => {
+    const [isOpen, setIsOpen] = useState(defaultOpen);
     const isOpenRef = useRef(isOpen);
     const isClosingRef = useRef(false);
     const closeHandlerRef = useRef<CloseHandler | null>(null);
     const isModalState = typeof ref === "function";
+    root = root ?? modalRoot;
 
     const control = useState(() => ({
         open: () => {
@@ -79,8 +86,8 @@ export const Modal = ({ component: Component, ref }: Props) => {
         isModalState ? [isOpen] : undefined
     );
 
-    if (!modalRoot) {
-        throw new Error("Modal root is null. You need to set it via setModalRoot()");
+    if (!root) {
+        throw new Error("Modal root is null. Set it via setModalRoot() or specify the `root` prop");
     }
 
     if (!isOpen) return null;
@@ -94,9 +101,9 @@ export const Modal = ({ component: Component, ref }: Props) => {
                 },
             }}
         >
-            <Component />
+            {children}
         </ModalContext>,
-        modalRoot
+        root
     );
 };
 

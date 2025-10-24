@@ -25,7 +25,9 @@ export const SearchInput = ({ className }: Props) => {
                     style={{ pointerEvents: "none" }}
                 />
             </button>
-            <Modal ref={modal.ref} component={SearchModal} />
+            <Modal ref={modal.ref}>
+                <SearchModal />
+            </Modal>
         </>
     );
 };
