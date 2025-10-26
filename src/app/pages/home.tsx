@@ -1,12 +1,12 @@
 import cn from "classnames";
 import { paths } from "@/config/paths";
 import { Header } from "@/comp/layout/header";
-import { LinkButton } from "@ui/link-button";
 import { Link } from "react-router";
 import { Footer } from "@/comp/layout/footer";
 import { Page } from "@/comp/layout/page";
 import { FlatIcon } from "@ui/flat-icon";
 import sl from "./home.module.scss";
+import { Button } from "@ui/button";
 
 const Service = ({
     imgSrc,
@@ -114,10 +114,12 @@ const HomePage = () => {
                                 {"\n"} banking with Open Banking.
                             </p>
                             <div className={sl.ctaBtns}>
-                                <LinkButton href={paths.register.path}>Get Started</LinkButton>
-                                <LinkButton kind="transparent" href={paths.void.path}>
+                                <Button asLink to={paths.register.path}>
+                                    Get Started
+                                </Button>
+                                <Button asLink kind="transparent" to={paths.void.path}>
                                     Learn More
-                                </LinkButton>
+                                </Button>
                             </div>
                         </div>
                         <div className={sl.imgWrapper}>

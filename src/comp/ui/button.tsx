@@ -1,9 +1,10 @@
 import cn from "classnames";
-import { type NavigateFunction, useNavigate } from "react-router";
+import { Link, type LinkProps } from "react-router";
 import { Preloader } from "@ui/preloader";
+import { FlatIcon } from "./flat-icon";
 import sl from "./button.module.scss";
 
-type Props = React.JSX.IntrinsicElements["button"] & {
+export type ButtonProps<AsLink extends boolean = false> = {
     kind?: "primary" | "neutral" | "transparent";
     size?: "sm" | "md";
     // Show the loading state of the button
@@ -13,45 +14,35 @@ type Props = React.JSX.IntrinsicElements["button"] & {
     beforeEnd?: React.ReactNode;
     // Make the button take the parent's width
     stretch?: boolean;
-    // Use the button as a A11Y-compatible link
-    href?: string;
-};
+    // Use button as a react-router link
+    asLink?: AsLink;
+} & (AsLink extends true ? LinkProps : React.JSX.IntrinsicElements["button"]);
 
 // These props are used when extending from the Button component
 // As an example, see Button.WithArrow below
-type ExtProps = Omit<Props, "beforeEnd">;
+type ExtProps = Omit<ButtonProps, "beforeEnd">;
 
-function getLinkProps(navigate: NavigateFunction, href: string) {
-    return {
-        role: "link",
-        onClick: () => navigate(href),
-    };
-}
-
-export const Button = ({
+export const Button = <AsLink extends boolean = false>({
     children,
-    type = "button",
     kind = "primary",
     size = "md",
-    loading = false,
+    loading,
     beforeEnd,
-    href,
     stretch,
-    disabled,
+    asLink,
+    type,
     ...rest
-}: Props) => {
-    const navigate = useNavigate();
+}: ButtonProps<AsLink>) => {
+    const Element = (asLink ? Link : "button") as any;
 
     return (
-        <button
+        <Element
             className={cn(sl.button, stretch && sl.stretch)}
-            type={type}
             data-kind={kind}
             data-size={size}
-            {...rest}
-            {...(href ? getLinkProps(navigate, href) : {})}
             aria-busy={loading}
-            disabled={disabled || loading}
+            type={asLink ? type : (type ?? "button")}
+            {...rest}
         >
             {loading ? (
                 <Preloader />
@@ -61,13 +52,12 @@ export const Button = ({
                     {beforeEnd}
                 </>
             )}
-        </button>
+        </Element>
     );
 };
 
-// TODO: Add arrow
 const WithArrow: React.FC<ExtProps> = props => {
-    return <Button {...props} beforeEnd={<p>Arrow</p>} />;
+    return <Button {...props} beforeEnd={<FlatIcon type="arrow-small-right" />} />;
 };
 
 WithArrow.displayName = "Button.WithArrow";

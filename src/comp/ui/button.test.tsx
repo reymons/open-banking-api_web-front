@@ -1,9 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Button } from "./button";
-
-jest.mock("react-router", () => ({
-    useNavigate: () => () => {},
-}));
+import { Router } from "@/testing/app";
 
 test("displays passed text", () => {
     const text = "Subscribe";
@@ -19,7 +16,13 @@ test("handles loading state", () => {
 });
 
 test("converts a button to a link", () => {
-    const href = "/some-path";
-    render(<Button href={href}>Hello</Button>);
-    expect(screen.getByRole("link")).toBeInTheDocument();
+    const path = "/some-path";
+    render(
+        <Router>
+            <Button asLink to={path}>
+                Hello
+            </Button>
+        </Router>
+    );
+    expect(screen.getByRole("link")).toHaveAttribute("href", path);
 });

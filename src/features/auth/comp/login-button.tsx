@@ -1,10 +1,10 @@
 import { paths } from "@/config/paths";
-import { LinkButton } from "@ui/link-button";
+import { Button } from "@ui/button";
 
 export const LoginButton = () => {
     return (
-        <LinkButton kind="transparent" href={paths.login.path}>
+        <Button asLink kind="transparent" to={paths.login.path}>
             Log in
-        </LinkButton>
+        </Button>
     );
 };
