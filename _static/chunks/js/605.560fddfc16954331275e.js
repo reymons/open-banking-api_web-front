@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkonline_banking"] = self["webpackChunkonline_banking"] || []).push([[676],{
+(self["webpackChunkonline_banking"] = self["webpackChunkonline_banking"] || []).push([[605],{
 
 /***/ 151:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
@@ -134,98 +134,7 @@ module.exports = __webpack_require__.p + "assets/payoneer-2x/1b73a752019e05a5a1b
 
 /***/ }),
 
-/***/ 4831:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/pig/996c43cf4aa5f8254f02.png";
-
-/***/ }),
-
-/***/ 4925:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/main-banner/a08698f9b49862403528.png";
-
-/***/ }),
-
-/***/ 5130:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/deal/028502597a7a88cf8308.webp";
-
-/***/ }),
-
-/***/ 5979:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/personal/4d64842839653b9b82d4.png";
-
-/***/ }),
-
-/***/ 6367:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/main-banner/6dd64d8ebcb59d222059.webp";
-
-/***/ }),
-
-/***/ 6901:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/paypal-2x/90f9b96fefc0e88b6f84.png";
-
-/***/ }),
-
-/***/ 7338:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/payoneer-1x/205b7248ed20ad621437.png";
-
-/***/ }),
-
-/***/ 7355:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/payoneer-1x/19a9373895a0fce88386.webp";
-
-/***/ }),
-
-/***/ 7620:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/bill/e0e51e146d59da2a5dcf.png";
-
-/***/ }),
-
-/***/ 7955:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/main-banner/91a2b88161eb55713465.webp";
-
-/***/ }),
-
-/***/ 7987:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/stub/06c805d5f8d0f0cd4e44.png";
-
-/***/ }),
-
-/***/ 8128:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/paypal-1x/8ae0349a2e398e7f6ffb.png";
-
-/***/ }),
-
-/***/ 8212:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/money/9f8e04c3c7da2235e273.webp";
-
-/***/ }),
-
-/***/ 8676:
+/***/ 4605:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -249,85 +158,15 @@ var stores_user = __webpack_require__(5995);
 var chunk_B7RQU5TL = __webpack_require__(125);
 // EXTERNAL MODULE: ./src/comp/ui/button.tsx + 2 modules
 var ui_button = __webpack_require__(5776);
-;// ./src/comp/ui/link-button.tsx
-function _define_property(obj, key, value) {
-    if (key in obj) {
-        Object.defineProperty(obj, key, {
-            value: value,
-            enumerable: true,
-            configurable: true,
-            writable: true
-        });
-    } else {
-        obj[key] = value;
-    }
-    return obj;
-}
-function _object_spread(target) {
-    for(var i = 1; i < arguments.length; i++){
-        var source = arguments[i] != null ? arguments[i] : {};
-        var ownKeys = Object.keys(source);
-        if (typeof Object.getOwnPropertySymbols === "function") {
-            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
-                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-            }));
-        }
-        ownKeys.forEach(function(key) {
-            _define_property(target, key, source[key]);
-        });
-    }
-    return target;
-}
-function _object_without_properties(source, excluded) {
-    if (source == null) return {};
-    var target = _object_without_properties_loose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _object_without_properties_loose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for(i = 0; i < sourceKeys.length; i++){
-        key = sourceKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-
-
-// A link but with the styles of the @ui/button
-//
-// TODO: export shared styles from the button component
-// and use them here as well so the native link element can be used
-const LinkButton = (_param)=>{
-    var { href } = _param, rest = _object_without_properties(_param, [
-        "href"
-    ]);
-    return /*#__PURE__*/ (0,jsx_runtime.jsx)(ui_button/* Button */.$, _object_spread({
-        href: href
-    }, rest));
-};
-
 ;// ./src/features/auth/comp/login-button.tsx
 
 
 
 const LoginButton = ()=>{
-    return /*#__PURE__*/ (0,jsx_runtime.jsx)(LinkButton, {
+    return /*#__PURE__*/ (0,jsx_runtime.jsx)(ui_button/* Button */.$, {
+        asLink: true,
         kind: "transparent",
-        href: paths/* paths */.f.login.path,
+        to: paths/* paths */.f.login.path,
         children: "Log in"
     });
 };
@@ -734,13 +573,15 @@ const HomePage = ()=>{
                                         /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                             className: home_module.ctaBtns,
                                             children: [
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)(LinkButton, {
-                                                    href: paths/* paths */.f.register.path,
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)(ui_button/* Button */.$, {
+                                                    asLink: true,
+                                                    to: paths/* paths */.f.register.path,
                                                     children: "Get Started"
                                                 }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)(LinkButton, {
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)(ui_button/* Button */.$, {
+                                                    asLink: true,
                                                     kind: "transparent",
-                                                    href: paths/* paths */.f.void.path,
+                                                    to: paths/* paths */.f.void.path,
                                                     children: "Learn More"
                                                 })
                                             ]
@@ -913,6 +754,97 @@ const HomePage = ()=>{
 };
 /* harmony default export */ const home = (HomePage);
 
+
+/***/ }),
+
+/***/ 4831:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/pig/996c43cf4aa5f8254f02.png";
+
+/***/ }),
+
+/***/ 4925:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/main-banner/a08698f9b49862403528.png";
+
+/***/ }),
+
+/***/ 5130:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/deal/028502597a7a88cf8308.webp";
+
+/***/ }),
+
+/***/ 5979:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/personal/4d64842839653b9b82d4.png";
+
+/***/ }),
+
+/***/ 6367:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/main-banner/6dd64d8ebcb59d222059.webp";
+
+/***/ }),
+
+/***/ 6901:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/paypal-2x/90f9b96fefc0e88b6f84.png";
+
+/***/ }),
+
+/***/ 7338:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/payoneer-1x/205b7248ed20ad621437.png";
+
+/***/ }),
+
+/***/ 7355:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/payoneer-1x/19a9373895a0fce88386.webp";
+
+/***/ }),
+
+/***/ 7620:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/bill/e0e51e146d59da2a5dcf.png";
+
+/***/ }),
+
+/***/ 7955:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/main-banner/91a2b88161eb55713465.webp";
+
+/***/ }),
+
+/***/ 7987:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/stub/06c805d5f8d0f0cd4e44.png";
+
+/***/ }),
+
+/***/ 8128:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/paypal-1x/8ae0349a2e398e7f6ffb.png";
+
+/***/ }),
+
+/***/ 8212:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/money/9f8e04c3c7da2235e273.webp";
 
 /***/ }),
 

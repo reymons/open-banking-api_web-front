@@ -140,7 +140,7 @@ const Protected = ()=>{
 
 
 
-const HomePage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(676)]).then(__webpack_require__.bind(__webpack_require__, 8676)));
+const HomePage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(605)]).then(__webpack_require__.bind(__webpack_require__, 4605)));
 const RegisterPage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(194)]).then(__webpack_require__.bind(__webpack_require__, 194)));
 const LoginPage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(36)]).then(__webpack_require__.bind(__webpack_require__, 1036)));
 const ProfilePageLayout = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(502), __webpack_require__.e(951)]).then(__webpack_require__.bind(__webpack_require__, 6951)).then((m)=>({
@@ -372,12 +372,13 @@ let modalRoot = null;
 function setModalRoot(root) {
     modalRoot = root;
 }
-const Modal = ({ component: Component, ref })=>{
-    const [isOpen, setIsOpen] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+const Modal = ({ ref, defaultOpen = false, root = null, children })=>{
+    const [isOpen, setIsOpen] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(defaultOpen);
     const isOpenRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(isOpen);
     const isClosingRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(false);
     const closeHandlerRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     const isModalState = typeof ref === "function";
+    root = root !== null && root !== void 0 ? root : modalRoot;
     const control = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(()=>({
             open: ()=>{
                 setIsOpen(true);
@@ -415,8 +416,8 @@ const Modal = ({ component: Component, ref })=>{
     isModalState ? [
         isOpen
     ] : undefined);
-    if (!modalRoot) {
-        throw new Error("Modal root is null. You need to set it via setModalRoot()");
+    if (!root) {
+        throw new Error("Modal root is null. Set it via setModalRoot() or specify the `root` prop");
     }
     if (!isOpen) return null;
     return /*#__PURE__*/ (0,react_dom__WEBPACK_IMPORTED_MODULE_2__.createPortal)(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ModalContext, {
@@ -426,8 +427,8 @@ const Modal = ({ component: Component, ref })=>{
                 closeHandlerRef.current = handler;
             }
         },
-        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Component, {})
-    }), modalRoot);
+        children: children
+    }), root);
 };
 function useModal() {
     const ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);

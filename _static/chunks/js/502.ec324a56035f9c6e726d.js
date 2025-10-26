@@ -663,6 +663,8 @@ const Preloader = ()=>{
     });
 };
 
+// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx
+var flat_icon = __webpack_require__(2958);
 ;// ./src/comp/ui/button.module.scss
 // extracted by mini-css-extract-plugin
 /* harmony default export */ const button_module = ({"button":"IZafq","stretch":"evY0B"});
@@ -751,33 +753,26 @@ function _object_without_properties_loose(source, excluded) {
 
 
 
-function getLinkProps(navigate, href) {
-    return {
-        role: "link",
-        onClick: ()=>navigate(href)
-    };
-}
+
 const Button = (_param)=>{
-    var { children, type = "button", kind = "primary", size = "md", loading = false, beforeEnd, href, stretch, disabled } = _param, rest = _object_without_properties(_param, [
+    var { children, kind = "primary", size = "md", loading, beforeEnd, stretch, asLink, type } = _param, rest = _object_without_properties(_param, [
         "children",
-        "type",
         "kind",
         "size",
         "loading",
         "beforeEnd",
-        "href",
         "stretch",
-        "disabled"
+        "asLink",
+        "type"
     ]);
-    const navigate = (0,chunk_B7RQU5TL/* useNavigate */.Zp)();
-    return /*#__PURE__*/ (0,jsx_runtime.jsx)("button", _object_spread_props(_object_spread({
+    const Element = asLink ? chunk_B7RQU5TL/* Link */.N_ : "button";
+    return /*#__PURE__*/ (0,jsx_runtime.jsx)(Element, _object_spread_props(_object_spread({
         className: classnames_default()(button_module.button, stretch && button_module.stretch),
-        type: type,
         "data-kind": kind,
-        "data-size": size
-    }, rest, href ? getLinkProps(navigate, href) : {}), {
+        "data-size": size,
         "aria-busy": loading,
-        disabled: disabled || loading,
+        type: asLink ? type : type !== null && type !== void 0 ? type : "button"
+    }, rest), {
         children: loading ? /*#__PURE__*/ (0,jsx_runtime.jsx)(Preloader, {}) : /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
             children: [
                 children,
@@ -786,11 +781,10 @@ const Button = (_param)=>{
         })
     }));
 };
-// TODO: Add arrow
 const WithArrow = (props)=>{
     return /*#__PURE__*/ (0,jsx_runtime.jsx)(Button, _object_spread_props(_object_spread({}, props), {
-        beforeEnd: /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
-            children: "Arrow"
+        beforeEnd: /*#__PURE__*/ (0,jsx_runtime.jsx)(flat_icon/* FlatIcon */.f, {
+            type: "arrow-small-right"
         })
     }));
 };
@@ -1049,7 +1043,8 @@ const SubmitButton = (props)=>{
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ui_button__WEBPACK_IMPORTED_MODULE_1__/* .Button */ .$, _object_spread_props(_object_spread({
         stretch: true
     }, props), {
-        loading: isSubmitting || isSubmitSuccessful,
+        loading: isSubmitting,
+        disabled: isSubmitSuccessful,
         type: "submit"
     }));
 };

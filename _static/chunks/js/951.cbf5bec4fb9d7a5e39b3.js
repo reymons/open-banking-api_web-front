@@ -248,7 +248,7 @@ const search_input_SearchInput = ({ className })=>{
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsx)(lib_modal/* Modal */.aF, {
                 ref: modal.ref,
-                component: SearchModal
+                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SearchModal, {})
             })
         ]
     });
@@ -453,8 +453,8 @@ const ProfileHeaderBurger = ()=>{
                 })
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsx)(lib_modal/* Modal */.aF, {
-                component: BurgerModal,
-                ref: modal.ref
+                ref: modal.ref,
+                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BurgerModal, {})
             })
         ]
     });

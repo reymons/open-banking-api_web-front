@@ -104,7 +104,7 @@
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "chunks/js/" + chunkId + "." + {"36":"a549a1151d937d7dd27a","103":"25679b0d599b7c2a5645","104":"1d055623e77e31023203","194":"147870b2830778536605","235":"9ffb5db78abff9d28271","500":"9c79bb9d5e6feed6cc45","502":"a7f13f2e32495b2bd472","648":"04a51a6067a414d221c7","676":"ca2195c357410293a3a6","804":"485c89cbc2e96c9e8973","951":"df6e43c161ecf81c38e1"}[chunkId] + ".js";
+/******/ 			return "chunks/js/" + chunkId + "." + {"36":"a549a1151d937d7dd27a","103":"25679b0d599b7c2a5645","104":"1d055623e77e31023203","194":"147870b2830778536605","235":"9ffb5db78abff9d28271","500":"9c79bb9d5e6feed6cc45","502":"ec324a56035f9c6e726d","605":"560fddfc16954331275e","648":"04a51a6067a414d221c7","804":"485c89cbc2e96c9e8973","951":"cbf5bec4fb9d7a5e39b3"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -113,7 +113,7 @@
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.miniCssF = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "chunks/css/" + chunkId + "." + {"194":"a7dad91d3bb4f35ddbcf","502":"5b50c0da1e02f3abbd52","676":"c88cb8f08a8f661753df","951":"d990f9eea3180b26db0c"}[chunkId] + ".css";
+/******/ 			return "chunks/css/" + chunkId + "." + {"194":"a7dad91d3bb4f35ddbcf","502":"c099fa4f5ca52c4c36ce","605":"c88cb8f08a8f661753df","951":"d990f9eea3180b26db0c"}[chunkId] + ".css";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -251,7 +251,7 @@
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.miniCss = (chunkId, promises) => {
-/******/ 			var cssChunks = {"194":1,"502":1,"676":1,"951":1};
+/******/ 			var cssChunks = {"194":1,"502":1,"605":1,"951":1};
 /******/ 			if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 			else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 				promises.push(installedCssChunks[chunkId] = loadStylesheet(chunkId).then(() => {
