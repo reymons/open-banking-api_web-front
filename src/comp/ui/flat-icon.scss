@@ -1,0 +1,7 @@
+@use "@/styles/device.scss";
+
+@include device.mobile {
+    .flat-icon {
+        transform: scale(0.8);
+    }
+}

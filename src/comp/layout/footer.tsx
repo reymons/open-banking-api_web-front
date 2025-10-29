@@ -2,9 +2,8 @@ import * as yup from "yup";
 import cn from "classnames";
 import { Logo } from "@ui/logo";
 import { Socials } from "../socials";
-import { Form } from "@ui/form";
+import { Form, SubmitButton } from "@ui/form";
 import { InputRaw } from "@ui/form/input";
-import { Button } from "@ui/button";
 import { Link } from "react-router";
 import { paths } from "@/config/paths";
 import sl from "./footer.module.scss";
@@ -70,7 +69,9 @@ export const Footer = () => {
                     <MainImage />
                     <div className={sl.content}>
                         <div className="fs-xl fsm-sm">New to Open Banking?</div>
-                        <h3 className="fs-3xl fsm-md">Enter your Email and{"\n"}Get Started Now</h3>
+                        <div className="fs-3xl fsm-md">
+                            Enter your Email and{"\n"}Get Started Now
+                        </div>
                         <Form
                             defaultValues={{ email: "" }}
                             schema={yup.object({
@@ -86,7 +87,7 @@ export const Footer = () => {
                                         invalid={!!formState.errors.email}
                                         autoComplete="email"
                                     />
-                                    <Button type="submit">Get Started</Button>
+                                    <SubmitButton stretch={false}>Get Started</SubmitButton>
                                 </div>
                             )}
                         </Form>

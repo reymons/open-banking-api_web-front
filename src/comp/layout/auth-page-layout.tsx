@@ -12,7 +12,7 @@ type Props = {
         title: string;
         element: React.ReactElement;
     };
-    hint: {
+    hint?: {
         text: string;
         link?: {
             href: string;
@@ -40,16 +40,18 @@ export const AuthPageLayout = ({ title, subTitle, form, hint }: Props) => {
                 </div>
                 <PrimaryContainer className={sl.formCnt} title={form.title} w={787}>
                     {form.element}
-                    <div className={cn(sl.authLink, "text-hint fw-500 fsm-sm")}>
-                        {hint.text}{" "}
-                        {hint.link ? (
-                            <Link to={hint.link.href} className="inline-clickable">
-                                {hint.link.text}
-                            </Link>
-                        ) : (
-                            hint.custom
-                        )}
-                    </div>
+                    {!!hint && (
+                        <div className={cn(sl.authLink, "text-hint fw-500 fsm-sm")}>
+                            {hint.text}{" "}
+                            {hint.link ? (
+                                <Link to={hint.link.href} className="inline-clickable">
+                                    {hint.link.text}
+                                </Link>
+                            ) : (
+                                hint.custom
+                            )}
+                        </div>
+                    )}
                 </PrimaryContainer>
             </div>
         </main>

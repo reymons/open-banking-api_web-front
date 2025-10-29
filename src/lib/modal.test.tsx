@@ -4,16 +4,13 @@ import { render, renderHook, screen, waitFor } from "@testing-library/react";
 import {
     Modal,
     ModalControl,
-    setModalRoot,
     useModal,
     useModalContext,
     useModalState,
     type ModalProps,
 } from "./modal";
 
-const modalRoot = "modal-root";
 const modalContentId = "target";
-let root: HTMLDivElement | null = null;
 
 type AppProps = {
     modalProps?: Partial<ModalProps>;
@@ -25,7 +22,7 @@ const App = ({ modalProps }: AppProps) => {
 
     return (
         <>
-            <Modal ref={modal.ref} {...modalProps}>
+            <Modal ref={modal.ref} root={document.body} {...modalProps}>
                 {content}
             </Modal>
             <button data-testid="open" onClick={() => modal.open()} />
@@ -58,17 +55,6 @@ const Control = ({ ref }: { ref: React.Ref<ModalControl> }) => {
 
 afterEach(() => {
     jest.clearAllMocks();
-});
-
-beforeAll(() => {
-    root = document.createElement("div");
-    root.id = modalRoot;
-    document.body.append(root);
-    setModalRoot(root);
-});
-
-afterAll(() => {
-    setModalRoot(null);
 });
 
 describe("Modal", () => {
@@ -149,6 +135,18 @@ describe("Modal", () => {
         const content = screen.getByTestId(modalContentId);
         expect(root.firstElementChild).toBe(content);
         root.remove();
+    });
+
+    it("renders children as function", () => {
+        render(
+            <App
+                modalProps={{
+                    defaultOpen: true,
+                    children: () => <div data-testid="target" />,
+                }}
+            />
+        );
+        expect(screen.getByTestId("target")).toBeInTheDocument();
     });
 });
 

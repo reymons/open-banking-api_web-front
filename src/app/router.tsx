@@ -7,6 +7,7 @@ import { LoadingScreen } from "@ui/loading-screen";
 const HomePage = lazy(() => import("./pages/home"));
 const RegisterPage = lazy(() => import("./pages/register"));
 const LoginPage = lazy(() => import("./pages/login"));
+const ResetPasswordPage = lazy(() => import("./pages/reset-password"));
 
 const ProfilePageLayout = lazy(() =>
     import("@/comp/layout/profile/profile-page-layout").then(m => ({
@@ -26,6 +27,7 @@ export const AppRouter = () => {
                     <Route path={paths.home.path} Component={HomePage} />
                     <Route path={paths.register.path} Component={RegisterPage} />
                     <Route path={paths.login.path} Component={LoginPage} />
+                    <Route path={paths.resetPassword.path} Component={ResetPasswordPage} />
                     <Route Component={Protected}>
                         <Route path={paths.profile.path} Component={ProfilePageLayout}>
                             <Route index Component={ProfileBasePage} />

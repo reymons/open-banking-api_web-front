@@ -17,6 +17,9 @@ export const paths = {
     register: {
         path: "/register",
     },
+    resetPassword: {
+        path: "/reset-password",
+    },
     void: {
         path: "/void",
     },

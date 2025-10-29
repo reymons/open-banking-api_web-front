@@ -1,3 +1,5 @@
+import "./flat-icon.scss";
+
 type FlatIconType =
     | "angle-small-down"
     | "apps"
@@ -29,6 +31,7 @@ type Props = {
 export const FlatIcon = ({ type, w = 21, h = 21, color, transform }: Props) => {
     return (
         <svg
+            className="flat-icon"
             width={w}
             height={h}
             style={color ? ({ "--color-flat-icon": color } as React.CSSProperties) : undefined}

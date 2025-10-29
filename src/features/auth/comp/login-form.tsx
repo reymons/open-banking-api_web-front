@@ -1,6 +1,8 @@
 import * as yup from "yup";
 import { type InferType } from "yup";
+import { useModal } from "@/lib/modal";
 import { Form, EmailInput, PasswordInput, SubmitButton, FormError } from "@ui/form";
+import { RequestPasswordResetModal } from "@/features/password";
 import { useLogin } from "../api/auth";
 
 const schema = yup.object({
@@ -14,6 +16,7 @@ type Props = {
 
 export const LoginForm = ({ onSuccess }: Props) => {
     const loginUser = useLogin();
+    const modal = useModal();
 
     const handleSubmit = async (data: InferType<typeof schema>) => {
         await loginUser(data);
@@ -21,28 +24,35 @@ export const LoginForm = ({ onSuccess }: Props) => {
     };
 
     return (
-        <Form schema={schema} defaultValues={{ email: "", password: "" }} onSubmit={handleSubmit}>
-            {({ register, formState }) => (
-                <>
-                    <EmailInput
-                        reg={register("email")}
-                        label="Email"
-                        placeholder="Enter your email here"
-                        error={formState.errors.email}
-                        autoComplete="username"
-                    />
-                    <PasswordInput.WithRecover
-                        reg={register("password")}
-                        label="Password"
-                        placeholder="Enter your password here"
-                        error={formState.errors.password}
-                        autoComplete="current-password"
-                        onRecover={() => {}}
-                    />
-                    <FormError />
-                    <SubmitButton>Log in</SubmitButton>
-                </>
-            )}
-        </Form>
+        <>
+            <Form
+                schema={schema}
+                defaultValues={{ email: "", password: "" }}
+                onSubmit={handleSubmit}
+            >
+                {({ register, formState }) => (
+                    <>
+                        <EmailInput
+                            reg={register("email")}
+                            label="Email"
+                            placeholder="Enter your email here"
+                            error={formState.errors.email}
+                            autoComplete="username"
+                        />
+                        <PasswordInput.WithRecover
+                            reg={register("password")}
+                            label="Password"
+                            placeholder="Enter your password here"
+                            error={formState.errors.password}
+                            autoComplete="current-password"
+                            onRecover={() => modal.open()}
+                        />
+                        <FormError />
+                        <SubmitButton>Log in</SubmitButton>
+                    </>
+                )}
+            </Form>
+            <RequestPasswordResetModal ref={modal.ref} />
+        </>
     );
 };

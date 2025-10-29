@@ -1,17 +1,28 @@
-import { useImperativeHandle, useRef, useState, createContext, useContext, useEffect } from "react";
+import {
+    useImperativeHandle,
+    useRef,
+    useState,
+    createContext,
+    useContext,
+    useEffect,
+    useMemo,
+} from "react";
 import { createPortal } from "react-dom";
 
 export type ModalControl = {
-    isOpen: boolean;
     open: () => void;
     close: () => void;
     toggle: () => void;
 };
 
+type ModalControlWithState = ModalControl & {
+    isOpen: boolean;
+};
+
 type CloseHandler = (done: () => void) => void;
 
 const ModalContext = createContext<null | {
-    modal: Omit<ModalControl, "isOpen">;
+    modal: ModalControl;
     setCloseHandler: (handler: CloseHandler) => void;
 }>(null);
 
@@ -28,7 +39,7 @@ export function setModalRoot(root: HTMLElement | null) {
 }
 
 export type ModalProps = {
-    children?: React.ReactNode;
+    children?: React.ReactNode | ((control: ModalControl) => React.ReactNode);
     // Modal controls
     // Use useModal().ref or useModalState().ref
     ref: React.Ref<ModalControl>;
@@ -36,9 +47,13 @@ export type ModalProps = {
     defaultOpen?: boolean;
     // Specify a custom root
     root?: HTMLElement | null;
+    // Events
+    onClose?: () => void;
 };
 
-export const Modal = ({ ref, defaultOpen = false, root = null, children }: ModalProps) => {
+export type ModalExtProps = Omit<ModalProps, "children">;
+
+export const Modal = ({ ref, defaultOpen = false, root = null, children, onClose }: ModalProps) => {
     const [isOpen, setIsOpen] = useState(defaultOpen);
     const isOpenRef = useRef(isOpen);
     const isClosingRef = useRef(false);
@@ -46,30 +61,34 @@ export const Modal = ({ ref, defaultOpen = false, root = null, children }: Modal
     const isModalState = typeof ref === "function";
     root = root ?? modalRoot;
 
-    const control = useState(() => ({
-        open: () => {
-            setIsOpen(true);
-            isOpenRef.current = true;
-        },
-        close: () => {
-            if (!isClosingRef.current) {
-                const finalize = () => {
-                    isClosingRef.current = false;
-                    isOpenRef.current = false;
-                    setIsOpen(false);
-                };
+    const control = useMemo(
+        () => ({
+            open: () => {
+                setIsOpen(true);
+                isOpenRef.current = true;
+            },
+            close: () => {
+                if (!isClosingRef.current) {
+                    const finalize = () => {
+                        isClosingRef.current = false;
+                        isOpenRef.current = false;
+                        setIsOpen(false);
+                        onClose?.();
+                    };
 
-                isClosingRef.current = true;
-                const closeHandler = closeHandlerRef.current;
-                if (closeHandler) closeHandler(finalize);
-                else finalize();
-            }
-        },
-        toggle: () => {
-            if (isOpenRef.current) control.close();
-            else control.open();
-        },
-    }))[0];
+                    isClosingRef.current = true;
+                    const closeHandler = closeHandlerRef.current;
+                    if (closeHandler) closeHandler(finalize);
+                    else finalize();
+                }
+            },
+            toggle: () => {
+                if (isOpenRef.current) control.close();
+                else control.open();
+            },
+        }),
+        [onClose]
+    );
 
     useEffect(() => {
         document.body.style.overflow = isOpen ? "hidden" : "visible";
@@ -83,7 +102,7 @@ export const Modal = ({ ref, defaultOpen = false, root = null, children }: Modal
         ref,
         () => ({ isOpen, ...control }),
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        isModalState ? [isOpen] : undefined
+        isModalState ? [isOpen, control] : [control]
     );
 
     if (!root) {
@@ -101,7 +120,7 @@ export const Modal = ({ ref, defaultOpen = false, root = null, children }: Modal
                 },
             }}
         >
-            {children}
+            {typeof children === "function" ? children(control) : children}
         </ModalContext>,
         root
     );
@@ -119,7 +138,7 @@ export function useModal() {
 }
 
 export function useModalState() {
-    const [modal, setModal] = useState<ModalControl | null>(null);
+    const [modal, setModal] = useState<ModalControlWithState | null>(null);
 
     return {
         ref: setModal,

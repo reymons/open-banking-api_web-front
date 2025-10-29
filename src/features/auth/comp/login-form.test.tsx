@@ -2,7 +2,6 @@ import userEvent from "@testing-library/user-event";
 import { faker } from "@faker-js/faker";
 import { render, screen } from "@testing-library/react";
 import { LoginForm } from "./login-form";
-import { Router } from "@/testing/app";
 
 const loginUser = jest.fn();
 
@@ -17,11 +16,7 @@ test("submits correct data and calls onSuccess", async () => {
     };
     const handleSuccess = jest.fn();
 
-    render(
-        <Router>
-            <LoginForm onSuccess={handleSuccess} />
-        </Router>
-    );
+    render(<LoginForm onSuccess={handleSuccess} />);
     await userEvent.type(screen.getByLabelText(/email/i), data.email);
     await userEvent.type(screen.getByLabelText(/^password$/i), data.password);
     await userEvent.click(screen.getByRole("button", { name: /log in/i }));

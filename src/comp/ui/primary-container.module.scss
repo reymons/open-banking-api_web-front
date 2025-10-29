@@ -20,7 +20,7 @@
     margin-bottom: unit.rem(30);
 
     @include device.mobile {
-        font-size: unit.rem(22);
+        font-size: unit.rem(20);
         margin-bottom: unit.rem(20);
     }
 }
