@@ -11,11 +11,13 @@ import { PreloadAssetsPlugin } from "./plugins/preload-assets-plugin";
 import { RemoveLicensePlugin } from "./plugins/remove-license-plugin";
 import { CriticalPathPlugin } from "./plugins/critical-path-plugin";
 import appCfg from "../app.config";
+import { GenerateHtmlPagesPlugin } from "./plugins/generate-html-pages-plugin";
 
 const isDev = process.env.NODE_ENV === "development";
 const withBundleAnalyzer = !!process.env.BUNDLE_ANALYZER;
 const rootDir = path.resolve(__dirname, "..");
 const outputDir = path.join(rootDir, "dist");
+const htmlFilename = isDev ? "index.dev.html" : "index.html";
 
 const cssBaseLoaders = [
     isDev
@@ -39,8 +41,6 @@ const cssBaseLoaders = [
           },
     "sass-loader",
 ].filter(Boolean);
-
-const htmlFilename = isDev ? "index.dev.html" : "index.html";
 
 // TODO: separate dev and prod configs
 const cfg: Configuration & { devServer: DevServerCfg } = {
@@ -105,6 +105,7 @@ const cfg: Configuration & { devServer: DevServerCfg } = {
     plugins: [
         new HtmlPlugin({
             template: path.join(rootDir, htmlFilename),
+            filename: htmlFilename,
         }),
         new EnvironmentPlugin(appCfg.env),
     ],
@@ -144,6 +145,11 @@ if (!isDev) {
         }),
         new PreloadAssetsPlugin({
             preloadedAssetsDir: path.join(rootDir, "src", "assets", "preloaded"),
+        }),
+        new GenerateHtmlPagesPlugin({
+            htmlFilename: path.join(outputDir, htmlFilename),
+            outDir: outputDir,
+            pages: appCfg.pages,
         })
     );
 
