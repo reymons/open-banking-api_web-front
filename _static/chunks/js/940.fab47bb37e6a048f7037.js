@@ -1,7 +1,7 @@
 "use strict";
-(self["webpackChunkonline_banking"] = self["webpackChunkonline_banking"] || []).push([[951],{
+(self["webpackChunkonline_banking"] = self["webpackChunkonline_banking"] || []).push([[940],{
 
-/***/ 6951:
+/***/ 4940:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -23,8 +23,8 @@ var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 var logo = __webpack_require__(5144);
 // EXTERNAL MODULE: ./src/lib/modal.tsx
 var lib_modal = __webpack_require__(7007);
-// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx
-var flat_icon = __webpack_require__(2958);
+// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx + 1 modules
+var flat_icon = __webpack_require__(8117);
 ;// ./src/comp/ui/form/search-input.module.scss
 // extracted by mini-css-extract-plugin
 /* harmony default export */ const search_input_module = ({"wrapper":"Jysf1"});
@@ -54,156 +54,8 @@ const SearchInput = ({ name, value, onValue, placeholder, style })=>{
 
 // EXTERNAL MODULE: ./node_modules/.pnpm/react@19.1.1/node_modules/react/index.js
 var react = __webpack_require__(9729);
-// EXTERNAL MODULE: ./src/comp/ui/primary-container.tsx + 1 modules
-var primary_container = __webpack_require__(2307);
-;// ./src/lib/hooks/use-outside-click.ts
-
-const useOutsideClick = (opts)=>{
-    const { onClick, isOpen, ref, deps = [] } = opts;
-    (0,react.useEffect)(()=>{
-        const node = ref.current;
-        if (!node || !isOpen) return;
-        const handleClick = (e)=>{
-            if (!node.contains(e.target)) onClick();
-        };
-        document.addEventListener("click", handleClick, {
-            capture: true
-        });
-        return ()=>{
-            document.removeEventListener("click", handleClick, {
-                capture: true
-            });
-        };
-    // eslint-disable-next-line
-    }, [
-        ref,
-        isOpen,
-        onClick,
-        ...deps
-    ]);
-};
-
-;// ./src/comp/main-modal-container.module.scss
-// extracted by mini-css-extract-plugin
-/* harmony default export */ const main_modal_container_module = ({"wrapper":"WdBvh","background":"pPq45","popUp":"_7xVz-","closing":"CG2uQ","backgroundReverse":"X3HX6","popUpReverse":"ePmjP"});
-;// ./src/comp/main-modal-container.tsx
-function _define_property(obj, key, value) {
-    if (key in obj) {
-        Object.defineProperty(obj, key, {
-            value: value,
-            enumerable: true,
-            configurable: true,
-            writable: true
-        });
-    } else {
-        obj[key] = value;
-    }
-    return obj;
-}
-function _object_spread(target) {
-    for(var i = 1; i < arguments.length; i++){
-        var source = arguments[i] != null ? arguments[i] : {};
-        var ownKeys = Object.keys(source);
-        if (typeof Object.getOwnPropertySymbols === "function") {
-            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
-                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-            }));
-        }
-        ownKeys.forEach(function(key) {
-            _define_property(target, key, source[key]);
-        });
-    }
-    return target;
-}
-function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-    if (Object.getOwnPropertySymbols) {
-        var symbols = Object.getOwnPropertySymbols(object);
-        if (enumerableOnly) {
-            symbols = symbols.filter(function(sym) {
-                return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-            });
-        }
-        keys.push.apply(keys, symbols);
-    }
-    return keys;
-}
-function _object_spread_props(target, source) {
-    source = source != null ? source : {};
-    if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-        ownKeys(Object(source)).forEach(function(key) {
-            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-    }
-    return target;
-}
-function _object_without_properties(source, excluded) {
-    if (source == null) return {};
-    var target = _object_without_properties_loose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _object_without_properties_loose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for(i = 0; i < sourceKeys.length; i++){
-        key = sourceKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-
-
-
-
-
-
-const animDuration = 300;
-const MainModalContainer = (_param)=>{
-    var { children } = _param, rest = _object_without_properties(_param, [
-        "children"
-    ]);
-    const { modal, setCloseHandler } = (0,lib_modal/* useModalContext */.k3)();
-    const wrapperRef = (0,react.useRef)(null);
-    const cntRef = (0,react.useRef)(null);
-    setCloseHandler((done)=>{
-        var _wrapperRef_current;
-        (_wrapperRef_current = wrapperRef.current) === null || _wrapperRef_current === void 0 ? void 0 : _wrapperRef_current.classList.add(main_modal_container_module.closing);
-        setTimeout(done, animDuration);
-    });
-    useOutsideClick({
-        isOpen: true,
-        ref: cntRef,
-        onClick: ()=>modal.close()
-    });
-    return /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-        className: main_modal_container_module.wrapper,
-        ref: wrapperRef,
-        style: {
-            "--anim-duration": `${animDuration}ms`
-        },
-        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(primary_container/* PrimaryContainer */.W, _object_spread_props(_object_spread({
-            ref: cntRef
-        }, rest), {
-            children: children
-        }))
-    });
-};
-
+// EXTERNAL MODULE: ./src/comp/main-modal-container.tsx + 1 modules
+var main_modal_container = __webpack_require__(5147);
 ;// ./src/features/search/comp/search-modal.tsx
 
 
@@ -211,7 +63,7 @@ const MainModalContainer = (_param)=>{
 
 const SearchModal = ()=>{
     const [query, setQuery] = (0,react.useState)("");
-    return /*#__PURE__*/ (0,jsx_runtime.jsx)(MainModalContainer, {
+    return /*#__PURE__*/ (0,jsx_runtime.jsx)(main_modal_container/* MainModalContainer */.K, {
         w: 600,
         children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SearchInput, {
             name: "search",
@@ -263,6 +115,8 @@ var profile_control = __webpack_require__(7669);
 ;// ./src/comp/layout/profile/profile-header.module.scss
 // extracted by mini-css-extract-plugin
 /* harmony default export */ const profile_header_module = ({"header":"CHFlA","logo":"P72d5","info":"-Hq5a","mainContent":"eoM7F","accNum":"iK-Vc","title":"SqkvI","searchInput":"YfnpR","burger":"hK6Dv"});
+// EXTERNAL MODULE: ./src/lib/hooks/use-outside-click.ts
+var use_outside_click = __webpack_require__(5323);
 ;// ./src/comp/side-modal-container.module.scss
 // extracted by mini-css-extract-plugin
 /* harmony default export */ const side_modal_container_module = ({"wrapper":"H6YEF","background":"UwvRX","popUp":"cObC-","closing":"o7Ini","backgroundReverse":"dhyVf","popUpReverse":"x-tEo"});
@@ -272,7 +126,7 @@ var profile_control = __webpack_require__(7669);
 
 
 
-const side_modal_container_animDuration = 300;
+const animDuration = 300;
 const SideModalContainer = ({ children, top, backgroundColor })=>{
     const { modal, setCloseHandler } = (0,lib_modal/* useModalContext */.k3)();
     const wrapperRef = (0,react.useRef)(null);
@@ -280,9 +134,9 @@ const SideModalContainer = ({ children, top, backgroundColor })=>{
     setCloseHandler((done)=>{
         var _wrapperRef_current;
         (_wrapperRef_current = wrapperRef.current) === null || _wrapperRef_current === void 0 ? void 0 : _wrapperRef_current.classList.add(side_modal_container_module.closing);
-        setTimeout(()=>done(), side_modal_container_animDuration);
+        setTimeout(()=>done(), animDuration);
     });
-    useOutsideClick({
+    (0,use_outside_click/* useOutsideClick */.j)({
         isOpen: true,
         ref: cntRef,
         onClick: ()=>modal.close()
@@ -291,7 +145,7 @@ const SideModalContainer = ({ children, top, backgroundColor })=>{
         className: side_modal_container_module.wrapper,
         style: {
             top,
-            "--anim-duration": `${side_modal_container_animDuration}ms`
+            "--anim-duration": `${animDuration}ms`
         },
         ref: wrapperRef,
         children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {

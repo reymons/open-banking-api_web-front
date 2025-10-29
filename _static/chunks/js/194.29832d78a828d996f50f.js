@@ -160,8 +160,8 @@ var form_error = __webpack_require__(7147);
 var submit_button = __webpack_require__(7193);
 // EXTERNAL MODULE: ./src/lib/css.ts
 var css = __webpack_require__(2783);
-// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx
-var flat_icon = __webpack_require__(2958);
+// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx + 1 modules
+var flat_icon = __webpack_require__(8117);
 ;// ./src/features/auth/comp/base-user-info-form.tsx
 function base_user_info_form_define_property(obj, key, value) {
     if (key in obj) {

@@ -10,11 +10,12 @@
 /* harmony export */   Kd: () => (/* binding */ BrowserRouter),
 /* harmony export */   N_: () => (/* binding */ Link),
 /* harmony export */   Zp: () => (/* binding */ useNavigate),
+/* harmony export */   ok: () => (/* binding */ useSearchParams),
 /* harmony export */   qh: () => (/* binding */ Route),
 /* harmony export */   sv: () => (/* binding */ Outlet),
 /* harmony export */   zy: () => (/* binding */ useLocation)
 /* harmony export */ });
-/* unused harmony exports Action, createBrowserHistory, invariant, createPath, parsePath, createContext, RouterContextProvider, convertRoutesToDataRoutes, matchRoutes, generatePath, matchPath, stripBasename, resolvePath, data, redirect, redirectDocument, replace, ErrorResponseImpl, isRouteErrorResponse, IDLE_NAVIGATION, IDLE_FETCHER, IDLE_BLOCKER, createRouter, createStaticHandler, getStaticContextFromError, isDataWithResponseInit, isResponse, isRedirectStatusCode, isRedirectResponse, isMutationMethod, DataRouterContext, DataRouterStateContext, RSCRouterContext, ViewTransitionContext, FetchersContext, AwaitContextProvider, NavigationContext, LocationContext, RouteContext, ENABLE_DEV_WARNINGS, useHref, useInRouterContext, useNavigationType, useMatch, useOutletContext, useOutlet, useParams, useResolvedPath, useRoutes, useNavigation, useRevalidator, useMatches, useLoaderData, useRouteLoaderData, useActionData, useRouteError, useAsyncValue, useAsyncError, useBlocker, warnOnce, mapRouteProperties, hydrationRouteProperties, createMemoryRouter, RouterProvider, MemoryRouter, Router, Await, createRoutesFromChildren, createRoutesFromElements, renderMatches, WithComponentProps, withComponentProps, WithHydrateFallbackProps, withHydrateFallbackProps, WithErrorBoundaryProps, withErrorBoundaryProps, createSearchParams, escapeHtml, encode, createRequestInit, SingleFetchRedirectSymbol, SINGLE_FETCH_REDIRECT_STATUS, NO_BODY_STATUS_CODES, StreamTransfer, getTurboStreamSingleFetchDataStrategy, getSingleFetchDataStrategyImpl, stripIndexParam, singleFetchUrl, decodeViaTurboStream, RemixErrorBoundary, createServerRoutes, createClientRoutesWithHMRRevalidationOptOut, noActionDefinedError, createClientRoutes, shouldHydrateRouteLoader, getPatchRoutesOnNavigationFunction, useFogOFWarDiscovery, getManifestPath, FrameworkContext, CRITICAL_CSS_DATA_ATTRIBUTE, Links, PrefetchPageLinks, Meta, setIsHydrated, Scripts, createBrowserRouter, createHashRouter, HashRouter, HistoryRouter, NavLink, Form, ScrollRestoration, useLinkClickHandler, useSearchParams, useSubmit, useFormAction, useFetcher, useFetchers, useScrollRestoration, useBeforeUnload, usePrompt, useViewTransitionState, StaticRouter, StaticRouterProvider, createStaticHandler2, createStaticRouter */
+/* unused harmony exports Action, createBrowserHistory, invariant, createPath, parsePath, createContext, RouterContextProvider, convertRoutesToDataRoutes, matchRoutes, generatePath, matchPath, stripBasename, resolvePath, data, redirect, redirectDocument, replace, ErrorResponseImpl, isRouteErrorResponse, IDLE_NAVIGATION, IDLE_FETCHER, IDLE_BLOCKER, createRouter, createStaticHandler, getStaticContextFromError, isDataWithResponseInit, isResponse, isRedirectStatusCode, isRedirectResponse, isMutationMethod, DataRouterContext, DataRouterStateContext, RSCRouterContext, ViewTransitionContext, FetchersContext, AwaitContextProvider, NavigationContext, LocationContext, RouteContext, ENABLE_DEV_WARNINGS, useHref, useInRouterContext, useNavigationType, useMatch, useOutletContext, useOutlet, useParams, useResolvedPath, useRoutes, useNavigation, useRevalidator, useMatches, useLoaderData, useRouteLoaderData, useActionData, useRouteError, useAsyncValue, useAsyncError, useBlocker, warnOnce, mapRouteProperties, hydrationRouteProperties, createMemoryRouter, RouterProvider, MemoryRouter, Router, Await, createRoutesFromChildren, createRoutesFromElements, renderMatches, WithComponentProps, withComponentProps, WithHydrateFallbackProps, withHydrateFallbackProps, WithErrorBoundaryProps, withErrorBoundaryProps, createSearchParams, escapeHtml, encode, createRequestInit, SingleFetchRedirectSymbol, SINGLE_FETCH_REDIRECT_STATUS, NO_BODY_STATUS_CODES, StreamTransfer, getTurboStreamSingleFetchDataStrategy, getSingleFetchDataStrategyImpl, stripIndexParam, singleFetchUrl, decodeViaTurboStream, RemixErrorBoundary, createServerRoutes, createClientRoutesWithHMRRevalidationOptOut, noActionDefinedError, createClientRoutes, shouldHydrateRouteLoader, getPatchRoutesOnNavigationFunction, useFogOFWarDiscovery, getManifestPath, FrameworkContext, CRITICAL_CSS_DATA_ATTRIBUTE, Links, PrefetchPageLinks, Meta, setIsHydrated, Scripts, createBrowserRouter, createHashRouter, HashRouter, HistoryRouter, NavLink, Form, ScrollRestoration, useLinkClickHandler, useSubmit, useFormAction, useFetcher, useFetchers, useScrollRestoration, useBeforeUnload, usePrompt, useViewTransitionState, StaticRouter, StaticRouterProvider, createStaticHandler2, createStaticRouter */
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9729);
 /**
  * react-router v7.9.1
@@ -9459,10 +9460,10 @@ function useSearchParams(defaultInit) {
     typeof URLSearchParams !== "undefined",
     `You cannot use the \`useSearchParams\` hook in a browser that does not support the URLSearchParams API. If you need to support Internet Explorer 11, we recommend you load a polyfill such as https://github.com/ungap/url-search-params.`
   );
-  let defaultSearchParamsRef = React10.useRef(createSearchParams(defaultInit));
-  let hasSetSearchParamsRef = React10.useRef(false);
+  let defaultSearchParamsRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(createSearchParams(defaultInit));
+  let hasSetSearchParamsRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(false);
   let location = useLocation();
-  let searchParams = React10.useMemo(
+  let searchParams = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(
     () => (
       // Only merge in the defaults if we haven't yet called setSearchParams.
       // Once we call that we want those to take precedence, otherwise you can't
@@ -9475,7 +9476,7 @@ function useSearchParams(defaultInit) {
     [location.search]
   );
   let navigate = useNavigate();
-  let setSearchParams = React10.useCallback(
+  let setSearchParams = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(
     (nextInit, navigateOptions) => {
       const newSearchParams = createSearchParams(
         typeof nextInit === "function" ? nextInit(new URLSearchParams(searchParams)) : nextInit

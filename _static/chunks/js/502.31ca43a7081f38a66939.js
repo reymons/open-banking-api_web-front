@@ -347,27 +347,27 @@ function px2rem(px, base = 16) {
 
 /***/ }),
 
-/***/ 2958:
+/***/ 3834:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   f: () => (/* binding */ FlatIcon)
+/* harmony export */   w: () => (/* binding */ requestPasswordReset),
+/* harmony export */   x: () => (/* binding */ resetPassword)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5813);
+/* harmony import */ var _lib_client_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3791);
 
-const FlatIcon = ({ type, w = 21, h = 21, color, transform })=>{
-    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-        width: w,
-        height: h,
-        style: color ? {
-            "--color-flat-icon": color
-        } : undefined,
-        transform: transform,
-        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("use", {
-            href: `${__webpack_require__(4720)}#${type}`
-        })
+// Sends a reset-password link to the specified email
+function requestPasswordReset(email) {
+    return _lib_client_http__WEBPACK_IMPORTED_MODULE_0__/* .clientV1 */ .r.post("/passwords/reset-requests", {
+        email
     });
-};
+}
+function resetPassword(token, password) {
+    return _lib_client_http__WEBPACK_IMPORTED_MODULE_0__/* .clientV1 */ .r.post("/passwords/reset-requests/submit", {
+        token,
+        password
+    });
+}
 
 
 /***/ }),
@@ -469,6 +469,149 @@ const Logo = ()=>{
 
 /***/ }),
 
+/***/ 5147:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  K: () => (/* binding */ MainModalContainer)
+});
+
+// EXTERNAL MODULE: ./node_modules/.pnpm/react@19.1.1/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(5813);
+// EXTERNAL MODULE: ./node_modules/.pnpm/react@19.1.1/node_modules/react/index.js
+var react = __webpack_require__(9729);
+// EXTERNAL MODULE: ./src/comp/ui/primary-container.tsx + 1 modules
+var primary_container = __webpack_require__(2307);
+// EXTERNAL MODULE: ./src/lib/modal.tsx
+var lib_modal = __webpack_require__(7007);
+// EXTERNAL MODULE: ./src/lib/hooks/use-outside-click.ts
+var use_outside_click = __webpack_require__(5323);
+;// ./src/comp/main-modal-container.module.scss
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const main_modal_container_module = ({"wrapper":"WdBvh","background":"pPq45","popUp":"_7xVz-","closing":"CG2uQ","backgroundReverse":"X3HX6","popUpReverse":"ePmjP"});
+;// ./src/comp/main-modal-container.tsx
+function _define_property(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        });
+    } else {
+        obj[key] = value;
+    }
+    return obj;
+}
+function _object_spread(target) {
+    for(var i = 1; i < arguments.length; i++){
+        var source = arguments[i] != null ? arguments[i] : {};
+        var ownKeys = Object.keys(source);
+        if (typeof Object.getOwnPropertySymbols === "function") {
+            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
+                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+            }));
+        }
+        ownKeys.forEach(function(key) {
+            _define_property(target, key, source[key]);
+        });
+    }
+    return target;
+}
+function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        if (enumerableOnly) {
+            symbols = symbols.filter(function(sym) {
+                return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+            });
+        }
+        keys.push.apply(keys, symbols);
+    }
+    return keys;
+}
+function _object_spread_props(target, source) {
+    source = source != null ? source : {};
+    if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+        ownKeys(Object(source)).forEach(function(key) {
+            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+    }
+    return target;
+}
+function _object_without_properties(source, excluded) {
+    if (source == null) return {};
+    var target = _object_without_properties_loose(source, excluded);
+    var key, i;
+    if (Object.getOwnPropertySymbols) {
+        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+        for(i = 0; i < sourceSymbolKeys.length; i++){
+            key = sourceSymbolKeys[i];
+            if (excluded.indexOf(key) >= 0) continue;
+            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+            target[key] = source[key];
+        }
+    }
+    return target;
+}
+function _object_without_properties_loose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for(i = 0; i < sourceKeys.length; i++){
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+    }
+    return target;
+}
+
+
+
+
+
+
+const animDuration = 300;
+const MainModalContainer = (_param)=>{
+    var { children } = _param, rest = _object_without_properties(_param, [
+        "children"
+    ]);
+    const { modal, setCloseHandler } = (0,lib_modal/* useModalContext */.k3)();
+    const wrapperRef = (0,react.useRef)(null);
+    const cntRef = (0,react.useRef)(null);
+    setCloseHandler((done)=>{
+        var _wrapperRef_current;
+        (_wrapperRef_current = wrapperRef.current) === null || _wrapperRef_current === void 0 ? void 0 : _wrapperRef_current.classList.add(main_modal_container_module.closing);
+        setTimeout(done, animDuration);
+    });
+    (0,use_outside_click/* useOutsideClick */.j)({
+        isOpen: true,
+        ref: cntRef,
+        onClick: ()=>modal.close()
+    });
+    return /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+        className: main_modal_container_module.wrapper,
+        ref: wrapperRef,
+        style: {
+            "--anim-duration": `${animDuration}ms`
+        },
+        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(primary_container/* PrimaryContainer */.W, _object_spread_props(_object_spread({
+            ref: cntRef
+        }, rest), {
+            children: children
+        }))
+    });
+};
+
+
+/***/ }),
+
 /***/ 5314:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -543,7 +686,7 @@ const AuthPageLayout = ({ title, subTitle, form, hint })=>{
                     w: 787,
                     children: [
                         form.element,
-                        /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                        !!hint && /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                             className: classnames_default()(auth_page_layout_module.authLink, "text-hint fw-500 fsm-sm"),
                             children: [
                                 hint.text,
@@ -560,6 +703,42 @@ const AuthPageLayout = ({ title, subTitle, form, hint })=>{
             ]
         })
     });
+};
+
+
+/***/ }),
+
+/***/ 5323:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   j: () => (/* binding */ useOutsideClick)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9729);
+
+const useOutsideClick = (opts)=>{
+    const { onClick, isOpen, ref, deps = [] } = opts;
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{
+        const node = ref.current;
+        if (!node || !isOpen) return;
+        const handleClick = (e)=>{
+            if (!node.contains(e.target)) onClick();
+        };
+        document.addEventListener("click", handleClick, {
+            capture: true
+        });
+        return ()=>{
+            document.removeEventListener("click", handleClick, {
+                capture: true
+            });
+        };
+    // eslint-disable-next-line
+    }, [
+        ref,
+        isOpen,
+        onClick,
+        ...deps
+    ]);
 };
 
 
@@ -663,8 +842,8 @@ const Preloader = ()=>{
     });
 };
 
-// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx
-var flat_icon = __webpack_require__(2958);
+// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx + 1 modules
+var flat_icon = __webpack_require__(8117);
 ;// ./src/comp/ui/button.module.scss
 // extracted by mini-css-extract-plugin
 /* harmony default export */ const button_module = ({"button":"IZafq","stretch":"evY0B"});
@@ -933,6 +1112,129 @@ const Socials = ({ className })=>{
             })
         ]
     });
+};
+
+
+/***/ }),
+
+/***/ 7003:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   W: () => (/* binding */ InfoModal)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5813);
+/* harmony import */ var _lib_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7007);
+/* harmony import */ var _main_modal_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5147);
+/* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5776);
+function _define_property(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        });
+    } else {
+        obj[key] = value;
+    }
+    return obj;
+}
+function _object_spread(target) {
+    for(var i = 1; i < arguments.length; i++){
+        var source = arguments[i] != null ? arguments[i] : {};
+        var ownKeys = Object.keys(source);
+        if (typeof Object.getOwnPropertySymbols === "function") {
+            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
+                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+            }));
+        }
+        ownKeys.forEach(function(key) {
+            _define_property(target, key, source[key]);
+        });
+    }
+    return target;
+}
+function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        if (enumerableOnly) {
+            symbols = symbols.filter(function(sym) {
+                return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+            });
+        }
+        keys.push.apply(keys, symbols);
+    }
+    return keys;
+}
+function _object_spread_props(target, source) {
+    source = source != null ? source : {};
+    if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+        ownKeys(Object(source)).forEach(function(key) {
+            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+    }
+    return target;
+}
+function _object_without_properties(source, excluded) {
+    if (source == null) return {};
+    var target = _object_without_properties_loose(source, excluded);
+    var key, i;
+    if (Object.getOwnPropertySymbols) {
+        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+        for(i = 0; i < sourceSymbolKeys.length; i++){
+            key = sourceSymbolKeys[i];
+            if (excluded.indexOf(key) >= 0) continue;
+            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+            target[key] = source[key];
+        }
+    }
+    return target;
+}
+function _object_without_properties_loose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for(i = 0; i < sourceKeys.length; i++){
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+    }
+    return target;
+}
+
+
+
+
+const InfoModal = (_param)=>{
+    var { children } = _param, rest = _object_without_properties(_param, [
+        "children"
+    ]);
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_modal__WEBPACK_IMPORTED_MODULE_1__/* .Modal */ .aF, _object_spread_props(_object_spread({}, rest), {
+        children: (modal)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_main_modal_container__WEBPACK_IMPORTED_MODULE_2__/* .MainModalContainer */ .K, {
+                title: "Info",
+                children: [
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                        className: "fsm-sm",
+                        children: children
+                    }),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+                        style: {
+                            marginTop: "2rem"
+                        },
+                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ui_button__WEBPACK_IMPORTED_MODULE_3__/* .Button */ .$, {
+                            onClick: ()=>modal.close(),
+                            stretch: true,
+                            children: "Close"
+                        })
+                    })
+                ]
+            })
+    }));
 };
 
 
@@ -1291,6 +1593,41 @@ const ProfileControl = ({ className })=>{
 
 /***/ }),
 
+/***/ 8117:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  f: () => (/* binding */ FlatIcon)
+});
+
+// EXTERNAL MODULE: ./node_modules/.pnpm/react@19.1.1/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(5813);
+;// ./src/comp/ui/flat-icon.scss
+// extracted by mini-css-extract-plugin
+
+;// ./src/comp/ui/flat-icon.tsx
+
+
+const FlatIcon = ({ type, w = 21, h = 21, color, transform })=>{
+    return /*#__PURE__*/ (0,jsx_runtime.jsx)("svg", {
+        className: "flat-icon",
+        width: w,
+        height: h,
+        style: color ? {
+            "--color-flat-icon": color
+        } : undefined,
+        transform: transform,
+        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("use", {
+            href: `${__webpack_require__(4720)}#${type}`
+        })
+    });
+};
+
+
+/***/ }),
+
 /***/ 8277:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1350,7 +1687,7 @@ module.exports = __webpack_require__.p + "assets/logo/f47510dcb8aedba733b3.webp"
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5813);
 /* harmony import */ var _lib_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2783);
 /* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7594);
-/* harmony import */ var _ui_flat_icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2958);
+/* harmony import */ var _ui_flat_icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8117);
 function _define_property(obj, key, value) {
     if (key in obj) {
         Object.defineProperty(obj, key, {
@@ -1437,8 +1774,8 @@ var classnames = __webpack_require__(7500);
 var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
 // EXTERNAL MODULE: ./src/lib/css.ts
 var css = __webpack_require__(2783);
-// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx
-var flat_icon = __webpack_require__(2958);
+// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx + 1 modules
+var flat_icon = __webpack_require__(8117);
 // EXTERNAL MODULE: ./src/comp/ui/form/input.tsx + 3 modules
 var input = __webpack_require__(7594);
 ;// ./src/comp/ui/form/derived/password-input.module.scss

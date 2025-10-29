@@ -228,13 +228,14 @@ var index_esm = __webpack_require__(8895);
 var socials = __webpack_require__(5815);
 // EXTERNAL MODULE: ./src/comp/ui/form/form.tsx + 1 modules
 var form_form = __webpack_require__(822);
+// EXTERNAL MODULE: ./src/comp/ui/form/submit-button.tsx
+var submit_button = __webpack_require__(7193);
 // EXTERNAL MODULE: ./src/comp/ui/form/input.tsx + 3 modules
 var input = __webpack_require__(7594);
 ;// ./src/comp/layout/footer.module.scss
 // extracted by mini-css-extract-plugin
 /* harmony default export */ const footer_module = ({"footer":"QhX4J","mainInfo":"-EZe6","links":"GXGMa","date":"_3O7XE","ctaBlock":"OspZE","content":"FCbGh","input":"vQQn1"});
 ;// ./src/comp/layout/footer.tsx
-
 
 
 
@@ -372,7 +373,7 @@ const Footer = ()=>{
                                     className: "fs-xl fsm-sm",
                                     children: "New to Open Banking?"
                                 }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsxs)("h3", {
+                                /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                     className: "fs-3xl fsm-md",
                                     children: [
                                         "Enter your Email and",
@@ -397,8 +398,8 @@ const Footer = ()=>{
                                                     invalid: !!formState.errors.email,
                                                     autoComplete: "email"
                                                 }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)(ui_button/* Button */.$, {
-                                                    type: "submit",
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)(submit_button/* SubmitButton */.b, {
+                                                    stretch: false,
                                                     children: "Get Started"
                                                 })
                                             ]
@@ -415,8 +416,8 @@ const Footer = ()=>{
 
 // EXTERNAL MODULE: ./src/comp/layout/page.tsx
 var page = __webpack_require__(4794);
-// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx
-var flat_icon = __webpack_require__(2958);
+// EXTERNAL MODULE: ./src/comp/ui/flat-icon.tsx + 1 modules
+var flat_icon = __webpack_require__(8117);
 ;// ./src/app/pages/home.module.scss
 // extracted by mini-css-extract-plugin
 /* harmony default export */ const home_module = ({"page":"_8ewRI","bannerWrapper":"_98KBH","banner":"bE2yg","subTitle":"ooU0O","bankName":"FAKSy","ctaBtns":"QKrz9","imgWrapper":"CFCvJ","section":"jHmlB","services":"_0OGOT","desc":"-rFDy","faq":"uymWQ","questionMark":"_3739c","faqDesc":"_0Uldd","faqItem":"LEBQ7","faqContent":"wzYZ-","faqContentText":"_6FmcW","paymentServices":"iNTuo"});

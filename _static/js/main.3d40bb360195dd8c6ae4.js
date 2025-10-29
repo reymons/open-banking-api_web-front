@@ -142,8 +142,9 @@ const Protected = ()=>{
 
 const HomePage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(605)]).then(__webpack_require__.bind(__webpack_require__, 4605)));
 const RegisterPage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(194)]).then(__webpack_require__.bind(__webpack_require__, 194)));
-const LoginPage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(36)]).then(__webpack_require__.bind(__webpack_require__, 1036)));
-const ProfilePageLayout = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(502), __webpack_require__.e(951)]).then(__webpack_require__.bind(__webpack_require__, 6951)).then((m)=>({
+const LoginPage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(833)]).then(__webpack_require__.bind(__webpack_require__, 4833)));
+const ResetPasswordPage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(17)]).then(__webpack_require__.bind(__webpack_require__, 7017)));
+const ProfilePageLayout = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(502), __webpack_require__.e(940)]).then(__webpack_require__.bind(__webpack_require__, 4940)).then((m)=>({
             default: m.ProfilePageLayout
         })));
 const ProfileBasePage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(502), __webpack_require__.e(104)]).then(__webpack_require__.bind(__webpack_require__, 5104)));
@@ -167,6 +168,10 @@ const AppRouter = ()=>{
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(chunk_B7RQU5TL/* Route */.qh, {
                         path: paths/* paths */.f.login.path,
                         Component: LoginPage
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)(chunk_B7RQU5TL/* Route */.qh, {
+                        path: paths/* paths */.f.resetPassword.path,
+                        Component: ResetPasswordPage
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(chunk_B7RQU5TL/* Route */.qh, {
                         Component: Protected,
@@ -372,14 +377,14 @@ let modalRoot = null;
 function setModalRoot(root) {
     modalRoot = root;
 }
-const Modal = ({ ref, defaultOpen = false, root = null, children })=>{
+const Modal = ({ ref, defaultOpen = false, root = null, children, onClose })=>{
     const [isOpen, setIsOpen] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(defaultOpen);
     const isOpenRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(isOpen);
     const isClosingRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(false);
     const closeHandlerRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     const isModalState = typeof ref === "function";
     root = root !== null && root !== void 0 ? root : modalRoot;
-    const control = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(()=>({
+    const control = (0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)(()=>({
             open: ()=>{
                 setIsOpen(true);
                 isOpenRef.current = true;
@@ -390,6 +395,7 @@ const Modal = ({ ref, defaultOpen = false, root = null, children })=>{
                         isClosingRef.current = false;
                         isOpenRef.current = false;
                         setIsOpen(false);
+                        onClose === null || onClose === void 0 ? void 0 : onClose();
                     };
                     isClosingRef.current = true;
                     const closeHandler = closeHandlerRef.current;
@@ -401,7 +407,9 @@ const Modal = ({ ref, defaultOpen = false, root = null, children })=>{
                 if (isOpenRef.current) control.close();
                 else control.open();
             }
-        }))[0];
+        }), [
+        onClose
+    ]);
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         document.body.style.overflow = isOpen ? "hidden" : "visible";
         return ()=>{
@@ -414,8 +422,11 @@ const Modal = ({ ref, defaultOpen = false, root = null, children })=>{
             isOpen
         }, control), // eslint-disable-next-line react-hooks/exhaustive-deps
     isModalState ? [
-        isOpen
-    ] : undefined);
+        isOpen,
+        control
+    ] : [
+        control
+    ]);
     if (!root) {
         throw new Error("Modal root is null. Set it via setModalRoot() or specify the `root` prop");
     }
@@ -427,7 +438,7 @@ const Modal = ({ ref, defaultOpen = false, root = null, children })=>{
                 closeHandlerRef.current = handler;
             }
         },
-        children: children
+        children: typeof children === "function" ? children(control) : children
     }), root);
 };
 function useModal() {
@@ -498,6 +509,9 @@ const paths = {
     },
     register: {
         path: "/register"
+    },
+    resetPassword: {
+        path: "/reset-password"
     },
     void: {
         path: "/void"
