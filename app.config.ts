@@ -26,5 +26,5 @@ export default {
     },
     // It's needed for gh pages so that you can access any pages via an address bar
     // Do not specify the home page since it's handeled by default
-    pages: getPages(paths).filter(p => p !== "/"),
+    pages: getPages(paths).filter(p => p !== paths.home.path),
 };
