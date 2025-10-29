@@ -10,8 +10,8 @@ import { getCssClass } from "./util";
 import { PreloadAssetsPlugin } from "./plugins/preload-assets-plugin";
 import { RemoveLicensePlugin } from "./plugins/remove-license-plugin";
 import { CriticalPathPlugin } from "./plugins/critical-path-plugin";
-import appCfg from "../app.config";
 import { GenerateHtmlPagesPlugin } from "./plugins/generate-html-pages-plugin";
+import appCfg from "../app.config";
 
 const isDev = process.env.NODE_ENV === "development";
 const withBundleAnalyzer = !!process.env.BUNDLE_ANALYZER;
@@ -103,11 +103,8 @@ const cfg: Configuration & { devServer: DevServerCfg } = {
         ],
     },
     plugins: [
-        new HtmlPlugin({
-            template: path.join(rootDir, htmlFilename),
-            filename: htmlFilename,
-        }),
         new EnvironmentPlugin(appCfg.env),
+        new HtmlPlugin({ template: path.join(rootDir, htmlFilename) }),
     ],
     mode: isDev ? "development" : "production",
     devtool: isDev ? "inline-source-map" : false,
@@ -132,6 +129,10 @@ const cfg: Configuration & { devServer: DevServerCfg } = {
           },
 };
 
+if (isDev) {
+    cfg.plugins!.push(new HtmlPlugin({ template: path.join(rootDir, htmlFilename) }));
+}
+
 if (!isDev) {
     cfg.plugins!.push(
         new CssExtractPlugin({
@@ -147,9 +148,9 @@ if (!isDev) {
             preloadedAssetsDir: path.join(rootDir, "src", "assets", "preloaded"),
         }),
         new GenerateHtmlPagesPlugin({
-            htmlFilename: path.join(outputDir, htmlFilename),
-            outDir: outputDir,
+            outDir: "pages",
             pages: appCfg.pages,
+            htmlFilename,
         })
     );
 

@@ -55,7 +55,8 @@ jobs:
         with:
           name: CNAME
           path: .
-      - run: mv ./_static/index.html index.html
+      - run: mv ./_static/index.html .
+      - run: mv ./_static/pages/* .
       - run: ls -l
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
