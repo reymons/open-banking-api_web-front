@@ -1,6 +1,6 @@
 import cn from "classnames";
 import { paths } from "@/config/paths";
-import { useLogout } from "@/features/auth";
+import { WithLogout } from "@/features/auth";
 import { FlatIcon } from "@ui/flat-icon";
 import { Link, useLocation } from "react-router";
 import sl from "./profile-nav.module.scss";
@@ -37,16 +37,7 @@ const links: Array<{
 ];
 
 export const ProfilePageNav = ({ className }: Props) => {
-    const logout = useLogout();
     const loc = useLocation();
-
-    const handleLogout = async () => {
-        try {
-            await logout();
-        } catch (err) {
-            console.error(err);
-        }
-    };
 
     return (
         <aside className={cn(sl.wrapper, className)}>
@@ -76,14 +67,18 @@ export const ProfilePageNav = ({ className }: Props) => {
                     })}
                 </ul>
             </nav>
-            <button
-                className={cn(sl.logoutBtn, "unstyled-button fw-700")}
-                type="button"
-                onClick={handleLogout}
-            >
-                <FlatIcon type="arrow-right" transform="rotate(180)" />
-                Log out
-            </button>
+            <WithLogout>
+                {logout => (
+                    <button
+                        className={cn(sl.logoutBtn, "unstyled-button fw-700")}
+                        type="button"
+                        onClick={logout}
+                    >
+                        <FlatIcon type="arrow-right" style={{ transform: "rotate(180deg)" }} />
+                        Log out
+                    </button>
+                )}
+            </WithLogout>
         </aside>
     );
 };

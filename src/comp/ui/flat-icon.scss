@@ -1,7 +1,13 @@
 @use "@/styles/device.scss";
 
+.flat-icon {
+    width: 21px;
+    height: 21px;
+}
+
 @include device.mobile {
     .flat-icon {
-        transform: scale(0.8);
+        width: 17px;
+        height: 17px;
     }
 }

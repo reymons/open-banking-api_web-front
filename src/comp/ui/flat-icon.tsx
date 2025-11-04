@@ -22,20 +22,18 @@ type FlatIconType =
 
 type Props = {
     type: FlatIconType;
-    w?: string | number;
-    h?: string | number;
     color?: string;
-    transform?: string;
+    style?: React.CSSProperties;
 };
 
-export const FlatIcon = ({ type, w = 21, h = 21, color, transform }: Props) => {
+export const FlatIcon = ({ type, color, style }: Props) => {
     return (
         <svg
             className="flat-icon"
-            width={w}
-            height={h}
-            style={color ? ({ "--color-flat-icon": color } as React.CSSProperties) : undefined}
-            transform={transform}
+            style={{
+                ...style,
+                ...(color ? { "--color-flat-icon": color } : undefined),
+            }}
         >
             <use href={`${require("@/assets/preloaded/icons/flat.svg")}#${type}`} />
         </svg>

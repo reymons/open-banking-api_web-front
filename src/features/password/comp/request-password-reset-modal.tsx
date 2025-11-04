@@ -22,7 +22,7 @@ export const RequestPasswordResetModal = (props: Props) => {
                     </MainModalContainer>
                 )}
             </Modal>
-            <InfoModal ref={infoModal.ref}>
+            <InfoModal ref={infoModal.ref} withRearBtn={false}>
                 <p>We`ve sent a link to your email</p>
                 <p>Please follow it to continue resetting your password</p>
             </InfoModal>

@@ -31,7 +31,11 @@ const ResetPasswordPage = () => {
                     ),
                 }}
             />
-            <InfoModal ref={successModal.ref} onClose={() => navigate(paths.login.path)}>
+            <InfoModal
+                ref={successModal.ref}
+                onClose={() => navigate(paths.login.path)}
+                withRearBtn={false}
+            >
                 <p>Your password has been successfully reset!</p>
                 <p>Please log in again</p>
             </InfoModal>
