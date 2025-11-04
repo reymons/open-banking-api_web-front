@@ -1,7 +1,7 @@
 "use strict";
-(self["webpackChunkonline_banking"] = self["webpackChunkonline_banking"] || []).push([[940],{
+(self["webpackChunkonline_banking"] = self["webpackChunkonline_banking"] || []).push([[386],{
 
-/***/ 4940:
+/***/ 5386:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -158,12 +158,17 @@ const SideModalContainer = ({ children, top, backgroundColor })=>{
     });
 };
 
+// EXTERNAL MODULE: ./src/comp/modals/info-modal.tsx + 2 modules
+var info_modal = __webpack_require__(5383);
+;// ./src/lib/net.ts
+function toError(err) {
+    if (err instanceof Error) return err;
+    return new Error("Something went wrong");
+}
+
 // EXTERNAL MODULE: ./src/features/auth/api/auth.ts
 var auth = __webpack_require__(1398);
-;// ./src/comp/layout/profile/profile-nav.module.scss
-// extracted by mini-css-extract-plugin
-/* harmony default export */ const profile_nav_module = ({"wrapper":"ZTu3-","logoutBtn":"_8vveY"});
-;// ./src/comp/layout/profile/profile-nav.tsx
+;// ./src/features/auth/comp/with-logout.tsx
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
     try {
         var info = gen[key](arg);
@@ -199,6 +204,60 @@ function _async_to_generator(fn) {
 
 
 
+const WithLogout = ({ children })=>{
+    const modal = (0,lib_modal/* useModal */.hS)();
+    const logout = (0,auth/* useLogout */.Wn)();
+    const [isLoading, setIsLoading] = (0,react.useState)(false);
+    const [error, setError] = (0,react.useState)(null);
+    const handleLogout = ()=>_async_to_generator(function*() {
+            setIsLoading(true);
+            try {
+                yield logout();
+            } catch (err) {
+                setError(toError(err));
+            }
+            setIsLoading(false);
+        })();
+    return /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+        children: [
+            children(()=>modal.open()),
+            /*#__PURE__*/ (0,jsx_runtime.jsxs)(info_modal/* InfoModal */.W, {
+                ref: modal.ref,
+                onClose: ()=>setError(null),
+                btnsProps: {
+                    rearBtnProps: {
+                        children: "Cancel"
+                    },
+                    frontBtnProps: {
+                        children: "Log out",
+                        onClick: handleLogout,
+                        loading: isLoading
+                    }
+                },
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                        children: "Are you sure you want to log out?"
+                    }),
+                    error && /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                        className: "text-danger",
+                        children: error.message
+                    })
+                ]
+            })
+        ]
+    });
+};
+
+;// ./src/comp/layout/profile/profile-nav.module.scss
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const profile_nav_module = ({"wrapper":"ZTu3-","logoutBtn":"_8vveY"});
+;// ./src/comp/layout/profile/profile-nav.tsx
+
+
+
+
+
+
 
 const links = [
     {
@@ -223,15 +282,7 @@ const links = [
     }
 ];
 const ProfilePageNav = ({ className })=>{
-    const logout = (0,auth/* useLogout */.Wn)();
     const loc = (0,chunk_B7RQU5TL/* useLocation */.zy)();
-    const handleLogout = ()=>_async_to_generator(function*() {
-            try {
-                yield logout();
-            } catch (err) {
-                console.error(err);
-            }
-        })();
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("aside", {
         className: classnames_default()(profile_nav_module.wrapper, className),
         children: [
@@ -258,17 +309,21 @@ const ProfilePageNav = ({ className })=>{
                     })
                 })
             }),
-            /*#__PURE__*/ (0,jsx_runtime.jsxs)("button", {
-                className: classnames_default()(profile_nav_module.logoutBtn, "unstyled-button fw-700"),
-                type: "button",
-                onClick: handleLogout,
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)(flat_icon/* FlatIcon */.f, {
-                        type: "arrow-right",
-                        transform: "rotate(180)"
-                    }),
-                    "Log out"
-                ]
+            /*#__PURE__*/ (0,jsx_runtime.jsx)(WithLogout, {
+                children: (logout)=>/*#__PURE__*/ (0,jsx_runtime.jsxs)("button", {
+                        className: classnames_default()(profile_nav_module.logoutBtn, "unstyled-button fw-700"),
+                        type: "button",
+                        onClick: logout,
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)(flat_icon/* FlatIcon */.f, {
+                                type: "arrow-right",
+                                style: {
+                                    transform: "rotate(180deg)"
+                                }
+                            }),
+                            "Log out"
+                        ]
+                    })
             })
         ]
     });

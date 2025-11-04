@@ -144,7 +144,7 @@ const HomePage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__w
 const RegisterPage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(194)]).then(__webpack_require__.bind(__webpack_require__, 194)));
 const LoginPage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(833)]).then(__webpack_require__.bind(__webpack_require__, 4833)));
 const ResetPasswordPage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(103), __webpack_require__.e(502), __webpack_require__.e(17)]).then(__webpack_require__.bind(__webpack_require__, 7017)));
-const ProfilePageLayout = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(502), __webpack_require__.e(940)]).then(__webpack_require__.bind(__webpack_require__, 4940)).then((m)=>({
+const ProfilePageLayout = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(500), __webpack_require__.e(502), __webpack_require__.e(386)]).then(__webpack_require__.bind(__webpack_require__, 5386)).then((m)=>({
             default: m.ProfilePageLayout
         })));
 const ProfileBasePage = /*#__PURE__*/ (0,react.lazy)(()=>Promise.all(/* import() */[__webpack_require__.e(502), __webpack_require__.e(104)]).then(__webpack_require__.bind(__webpack_require__, 5104)));

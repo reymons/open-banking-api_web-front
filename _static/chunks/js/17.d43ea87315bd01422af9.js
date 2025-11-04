@@ -18,8 +18,8 @@ var jsx_runtime = __webpack_require__(5813);
 var auth_page_layout = __webpack_require__(5314);
 // EXTERNAL MODULE: ./src/comp/layout/page.tsx
 var page = __webpack_require__(4794);
-// EXTERNAL MODULE: ./src/comp/modals/info-modal.tsx
-var info_modal = __webpack_require__(7003);
+// EXTERNAL MODULE: ./src/comp/modals/info-modal.tsx + 2 modules
+var info_modal = __webpack_require__(5383);
 // EXTERNAL MODULE: ./src/config/paths.ts + 1 modules
 var paths = __webpack_require__(9826);
 // EXTERNAL MODULE: ./node_modules/.pnpm/yup@1.7.1/node_modules/yup/index.esm.js
@@ -149,6 +149,7 @@ const ResetPasswordPage = ()=>{
             /*#__PURE__*/ (0,jsx_runtime.jsxs)(info_modal/* InfoModal */.W, {
                 ref: successModal.ref,
                 onClose: ()=>navigate(paths/* paths */.f.login.path),
+                withRearBtn: false,
                 children: [
                     /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
                         children: "Your password has been successfully reset!"

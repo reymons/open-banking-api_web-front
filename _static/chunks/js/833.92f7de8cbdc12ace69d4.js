@@ -102,8 +102,8 @@ const RequestPasswordResetForm = ({ onSuccess })=>{
     });
 };
 
-// EXTERNAL MODULE: ./src/comp/modals/info-modal.tsx
-var info_modal = __webpack_require__(7003);
+// EXTERNAL MODULE: ./src/comp/modals/info-modal.tsx + 2 modules
+var info_modal = __webpack_require__(5383);
 ;// ./src/features/password/comp/request-password-reset-modal.tsx
 function _define_property(obj, key, value) {
     if (key in obj) {
@@ -180,6 +180,7 @@ const RequestPasswordResetModal = (props)=>{
             })),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)(info_modal/* InfoModal */.W, {
                 ref: infoModal.ref,
+                withRearBtn: false,
                 children: [
                     /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
                         children: "We`ve sent a link to your email"

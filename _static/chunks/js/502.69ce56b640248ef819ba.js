@@ -744,6 +744,200 @@ const useOutsideClick = (opts)=>{
 
 /***/ }),
 
+/***/ 5383:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  W: () => (/* binding */ InfoModal)
+});
+
+// EXTERNAL MODULE: ./node_modules/.pnpm/react@19.1.1/node_modules/react/jsx-runtime.js
+var jsx_runtime = __webpack_require__(5813);
+// EXTERNAL MODULE: ./src/lib/modal.tsx
+var modal = __webpack_require__(7007);
+// EXTERNAL MODULE: ./src/comp/main-modal-container.tsx + 1 modules
+var main_modal_container = __webpack_require__(5147);
+// EXTERNAL MODULE: ./node_modules/.pnpm/classnames@2.5.1/node_modules/classnames/index.js
+var classnames = __webpack_require__(7500);
+var classnames_default = /*#__PURE__*/__webpack_require__.n(classnames);
+// EXTERNAL MODULE: ./src/comp/ui/button.tsx + 2 modules
+var ui_button = __webpack_require__(5776);
+;// ./src/comp/ui/button-pair.module.scss
+// extracted by mini-css-extract-plugin
+/* harmony default export */ const button_pair_module = ({"wrapper":"SxORX","dirY":"_488tf"});
+;// ./src/comp/ui/button-pair.tsx
+function _define_property(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        });
+    } else {
+        obj[key] = value;
+    }
+    return obj;
+}
+function _object_spread(target) {
+    for(var i = 1; i < arguments.length; i++){
+        var source = arguments[i] != null ? arguments[i] : {};
+        var ownKeys = Object.keys(source);
+        if (typeof Object.getOwnPropertySymbols === "function") {
+            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
+                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+            }));
+        }
+        ownKeys.forEach(function(key) {
+            _define_property(target, key, source[key]);
+        });
+    }
+    return target;
+}
+
+
+
+
+const ButtonPair = ({ withRearBtn = true, dir = "x", rearBtnProps, frontBtnProps })=>{
+    const isDirY = dir === "y";
+    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+        className: classnames_default()(button_pair_module.wrapper, isDirY && button_pair_module.dirY),
+        children: [
+            withRearBtn && /*#__PURE__*/ (0,jsx_runtime.jsx)(ui_button/* Button */.$, _object_spread({
+                stretch: isDirY,
+                kind: "neutral"
+            }, rearBtnProps)),
+            /*#__PURE__*/ (0,jsx_runtime.jsx)(ui_button/* Button */.$, _object_spread({}, frontBtnProps))
+        ]
+    });
+};
+
+;// ./src/comp/modals/info-modal.tsx
+function info_modal_define_property(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        });
+    } else {
+        obj[key] = value;
+    }
+    return obj;
+}
+function info_modal_object_spread(target) {
+    for(var i = 1; i < arguments.length; i++){
+        var source = arguments[i] != null ? arguments[i] : {};
+        var ownKeys = Object.keys(source);
+        if (typeof Object.getOwnPropertySymbols === "function") {
+            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
+                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+            }));
+        }
+        ownKeys.forEach(function(key) {
+            info_modal_define_property(target, key, source[key]);
+        });
+    }
+    return target;
+}
+function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        if (enumerableOnly) {
+            symbols = symbols.filter(function(sym) {
+                return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+            });
+        }
+        keys.push.apply(keys, symbols);
+    }
+    return keys;
+}
+function _object_spread_props(target, source) {
+    source = source != null ? source : {};
+    if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+        ownKeys(Object(source)).forEach(function(key) {
+            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+    }
+    return target;
+}
+function _object_without_properties(source, excluded) {
+    if (source == null) return {};
+    var target = _object_without_properties_loose(source, excluded);
+    var key, i;
+    if (Object.getOwnPropertySymbols) {
+        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+        for(i = 0; i < sourceSymbolKeys.length; i++){
+            key = sourceSymbolKeys[i];
+            if (excluded.indexOf(key) >= 0) continue;
+            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+            target[key] = source[key];
+        }
+    }
+    return target;
+}
+function _object_without_properties_loose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for(i = 0; i < sourceKeys.length; i++){
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+    }
+    return target;
+}
+
+
+
+
+const InfoModal = (_param)=>{
+    var { children, btnsProps, withRearBtn = true, w = 475 } = _param, rest = _object_without_properties(_param, [
+        "children",
+        "btnsProps",
+        "withRearBtn",
+        "w"
+    ]);
+    return /*#__PURE__*/ (0,jsx_runtime.jsx)(modal/* Modal */.aF, _object_spread_props(info_modal_object_spread({}, rest), {
+        children: (modal)=>/*#__PURE__*/ (0,jsx_runtime.jsxs)(main_modal_container/* MainModalContainer */.K, {
+                title: "Info",
+                w: w,
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                        className: "fsm-sm",
+                        children: children
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                        style: {
+                            marginTop: "2rem"
+                        },
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(ButtonPair, _object_spread_props(info_modal_object_spread({}, btnsProps), {
+                            withRearBtn: withRearBtn,
+                            rearBtnProps: info_modal_object_spread({
+                                onClick: ()=>modal.close(),
+                                children: "Close"
+                            }, btnsProps === null || btnsProps === void 0 ? void 0 : btnsProps.rearBtnProps),
+                            frontBtnProps: info_modal_object_spread({
+                                onClick: withRearBtn ? undefined : ()=>modal.close(),
+                                children: withRearBtn ? "OK" : "Close"
+                            }, btnsProps === null || btnsProps === void 0 ? void 0 : btnsProps.frontBtnProps)
+                        }))
+                    })
+                ]
+            })
+    }));
+};
+
+
+/***/ }),
+
 /***/ 5776:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1117,129 +1311,6 @@ const Socials = ({ className })=>{
 
 /***/ }),
 
-/***/ 7003:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   W: () => (/* binding */ InfoModal)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5813);
-/* harmony import */ var _lib_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7007);
-/* harmony import */ var _main_modal_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5147);
-/* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5776);
-function _define_property(obj, key, value) {
-    if (key in obj) {
-        Object.defineProperty(obj, key, {
-            value: value,
-            enumerable: true,
-            configurable: true,
-            writable: true
-        });
-    } else {
-        obj[key] = value;
-    }
-    return obj;
-}
-function _object_spread(target) {
-    for(var i = 1; i < arguments.length; i++){
-        var source = arguments[i] != null ? arguments[i] : {};
-        var ownKeys = Object.keys(source);
-        if (typeof Object.getOwnPropertySymbols === "function") {
-            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
-                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-            }));
-        }
-        ownKeys.forEach(function(key) {
-            _define_property(target, key, source[key]);
-        });
-    }
-    return target;
-}
-function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-    if (Object.getOwnPropertySymbols) {
-        var symbols = Object.getOwnPropertySymbols(object);
-        if (enumerableOnly) {
-            symbols = symbols.filter(function(sym) {
-                return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-            });
-        }
-        keys.push.apply(keys, symbols);
-    }
-    return keys;
-}
-function _object_spread_props(target, source) {
-    source = source != null ? source : {};
-    if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-        ownKeys(Object(source)).forEach(function(key) {
-            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-    }
-    return target;
-}
-function _object_without_properties(source, excluded) {
-    if (source == null) return {};
-    var target = _object_without_properties_loose(source, excluded);
-    var key, i;
-    if (Object.getOwnPropertySymbols) {
-        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-        for(i = 0; i < sourceSymbolKeys.length; i++){
-            key = sourceSymbolKeys[i];
-            if (excluded.indexOf(key) >= 0) continue;
-            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-            target[key] = source[key];
-        }
-    }
-    return target;
-}
-function _object_without_properties_loose(source, excluded) {
-    if (source == null) return {};
-    var target = {};
-    var sourceKeys = Object.keys(source);
-    var key, i;
-    for(i = 0; i < sourceKeys.length; i++){
-        key = sourceKeys[i];
-        if (excluded.indexOf(key) >= 0) continue;
-        target[key] = source[key];
-    }
-    return target;
-}
-
-
-
-
-const InfoModal = (_param)=>{
-    var { children } = _param, rest = _object_without_properties(_param, [
-        "children"
-    ]);
-    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_modal__WEBPACK_IMPORTED_MODULE_1__/* .Modal */ .aF, _object_spread_props(_object_spread({}, rest), {
-        children: (modal)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_main_modal_container__WEBPACK_IMPORTED_MODULE_2__/* .MainModalContainer */ .K, {
-                title: "Info",
-                children: [
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-                        className: "fsm-sm",
-                        children: children
-                    }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-                        style: {
-                            marginTop: "2rem"
-                        },
-                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ui_button__WEBPACK_IMPORTED_MODULE_3__/* .Button */ .$, {
-                            onClick: ()=>modal.close(),
-                            stretch: true,
-                            children: "Close"
-                        })
-                    })
-                ]
-            })
-    }));
-};
-
-
-/***/ }),
-
 /***/ 7147:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1608,17 +1679,42 @@ var jsx_runtime = __webpack_require__(5813);
 // extracted by mini-css-extract-plugin
 
 ;// ./src/comp/ui/flat-icon.tsx
+function _define_property(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        });
+    } else {
+        obj[key] = value;
+    }
+    return obj;
+}
+function _object_spread(target) {
+    for(var i = 1; i < arguments.length; i++){
+        var source = arguments[i] != null ? arguments[i] : {};
+        var ownKeys = Object.keys(source);
+        if (typeof Object.getOwnPropertySymbols === "function") {
+            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
+                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+            }));
+        }
+        ownKeys.forEach(function(key) {
+            _define_property(target, key, source[key]);
+        });
+    }
+    return target;
+}
 
 
-const FlatIcon = ({ type, w = 21, h = 21, color, transform })=>{
+const FlatIcon = ({ type, color, style })=>{
     return /*#__PURE__*/ (0,jsx_runtime.jsx)("svg", {
         className: "flat-icon",
-        width: w,
-        height: h,
-        style: color ? {
+        style: _object_spread({}, style, color ? {
             "--color-flat-icon": color
-        } : undefined,
-        transform: transform,
+        } : undefined),
         children: /*#__PURE__*/ (0,jsx_runtime.jsx)("use", {
             href: `${__webpack_require__(4720)}#${type}`
         })
